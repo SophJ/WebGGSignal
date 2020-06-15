@@ -1,0 +1,479 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+  
+    <div class="text-center">
+        <h3 class="display-4">Sensors</h3>
+
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta http-equiv="refresh" content="30">
+            <style>
+                /* width */
+                ::-webkit-scrollbar {
+                    width: 10px;
+                }
+
+                /* Track */
+                ::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                }
+
+                /* Handle */
+                ::-webkit-scrollbar-thumb {
+                    background: #888;
+                }
+
+                    /* Handle on hover */
+                    ::-webkit-scrollbar-thumb:hover {
+                        background: #555;
+                    }
+            </style>
+
+            <style>
+                body {
+                    background-color: ghostwhite;
+                }
+
+                table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+
+                td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+
+                tr:nth-child(even) {
+                    background-color: #dddddd;
+                }
+            </style>
+
+        </head>
+
+        <body>
+
+            <h4>Gathergate MCCB / Meter Cloud Panel</h4>
+
+            <h6>
+                <label for="MCCB">Select Local Sensor:</label>
+            </h6>
+
+            <select id="DeviceId" class="form-control sprites-arrow-down" onchange="GetSelectedValue()">
+                <option value=" " selected disabled hidden>Select an Option</option>
+                <option value="59001" >59001</option>
+                <option value="59002">59002</option>
+                <option value="59003">59003</option>
+                <option value="59004">59004</option>
+            </select>
+            <hr>
+
+            <script>
+                window.onload = hideTable;
+                var MCCB1_59001_Status = "NIL";
+                var MCCB2_59001_Status = "NIL";
+                var MCCB3_59001_Status = "NIL";
+                var MCCB4_59001_Status = "NIL";
+
+                function hideTable() {
+                    document.getElementById('table1').style.display = 'none';
+                }
+
+                function GetSelectedValue() {
+                    var e = document.getElementById("DeviceId");
+                    var result = e.options[e.selectedIndex].value;
+                    @model WebGGSignal.Models.ReadingResultModel
+                    if (result == 59001) {
+                    var MCCB1_status = @Model.MCCB1
+                    var MCCB2_status = @Model.MCCB2
+                    var MCCB3_status = @Model.MCCB3
+                    var MCCB4_status = @Model.MCCB4
+                    var Power1_status = @Model.TotalKWhCH1
+
+                    var Temperature1_status = @Model.T1
+                    var Temperature2_status = @Model.T2
+                    var Temperature3_status = @Model.T3
+                    var Temperature4_status = @Model.T4
+                    var Temperature5_status = @Model.T5
+                } else {
+                        var MCCB1_status = "nil";
+                        var MCCB2_status = "nil";
+                        var MCCB3_status = "nil";
+                        var MCCB4_status = "nil";
+                        var Power1_status = "nil";
+                        var Temperature1_status = "nil";
+                        var Temperature2_status = "nil";
+                        var Temperature3_status = "nil";
+                        var Temperature4_status = "nil";
+                        var Temperature5_status = "nil";
+                }
+
+                    if (MCCB1_status == 1) {
+                        var status1 = "ON";
+                        MCCB1_59001_Status = status1;
+                        var a = document.getElementById("table1").rows[1].cells;
+                        a[1].style.color = "White";
+                        a[1].bgColor = "green";
+                    }
+                    else if (MCCB1_status == 0) {
+                        var status1 = "OFF";
+                        MCCB1_59001_Status = status1;
+                        var a = document.getElementById("table1").rows[1].cells;
+                        a[1].style.color = "White";
+                        a[1].bgColor = "red";
+                    } else if (MCCB1_status == "nil") {
+                        var status1 = "Not Connected";
+                        MCCB1_59001_Status = status1;
+                        var a = document.getElementById("table1").rows[1].cells;
+                        a[1].style.color = "Black";
+                        a[1].bgColor = "transparent";
+                    }else {
+                        var status1 = "TRIP";
+                        MCCB1_59001_Status = status1;
+                        var a = document.getElementById("table1").rows[1].cells;
+                        a[1].style.color = "Black";
+                        a[1].bgColor = "Yellow";
+                    }
+                    if (MCCB2_status == 1) {
+                        var status2 = "ON";
+                        MCCB2_59001_Status = status2;
+                        var a = document.getElementById("table1").rows[2].cells;
+                        a[1].style.color = "White";
+                        a[1].bgColor = "green";
+                    }else if (MCCB2_status == 0) {
+                        var status2 = "OFF";
+                        MCCB2_59001_Status = status2;
+                        var a = document.getElementById("table1").rows[2].cells;
+                        a[1].style.color = "White";
+                        a[1].bgColor = "red";
+                    } else if (MCCB2_status == "nil") {
+                        var status2 = "Not Connected";
+                        MCCB2_59001_Status = status2;
+                        var a = document.getElementById("table1").rows[2].cells;
+                        a[1].style.color = "Black";
+                        a[1].bgColor = "transparent";
+                    }else {
+                        var status2 = "TRIP";
+                        MCCB2_59001_Status = status2;
+                        var a = document.getElementById("table1").rows[2].cells;
+                        a[1].style.color = "Black";
+                        a[1].bgColor = "Yellow";
+                    }
+                    if (MCCB3_status == 1) {
+                        var status3 = "ON";
+                        var MCCB3_59001_Status = status3; 
+                        var a = document.getElementById("table1").rows[3].cells;
+                        a[1].style.color = "White";
+                        a[1].bgColor = "green";
+                    }else if (MCCB3_status == 0) {
+                        var status3 = "OFF";
+                        var MCCB3_59001_Status = status3;
+                        var a = document.getElementById("table1").rows[3].cells;
+                        a[1].style.color = "White";
+                        a[1].bgColor = "red";
+                    } else if (MCCB3_status == "nil") {
+                        var status3 = "Not Connected";
+                        var MCCB3_59001_Status = status3;
+                        var a = document.getElementById("table1").rows[3].cells;
+                        a[1].style.color = "Black";
+                        a[1].bgColor = "transparent";
+                    }else {
+                        var status3 = "TRIP";
+                        var MCCB3_59001_Status = status3;
+                        var a = document.getElementById("table1").rows[3].cells;
+                        a[1].style.color = "Black";
+                        a[1].bgColor = "Yellow";
+                    }
+                    if (MCCB4_status == 1) {
+                        var status4 = "ON";
+                        var MCCB4_59001_Status = status4;
+                        var a = document.getElementById("table1").rows[4].cells;
+                        a[1].style.color = "White";
+                        a[1].bgColor = "green";
+                    }
+                    else if (MCCB4_status == 0) {
+                        var status4 = "OFF";
+                        var MCCB4_59001_Status = status4;
+                        var a = document.getElementById("table1").rows[4].cells;
+                        a[1].style.color = "White";
+                        a[1].bgColor = "red";
+                    } else if (MCCB4_status == "nil") {
+                        var status4 = "Not Connected";
+                        var MCCB4_59001_Status = status4;
+                        var a = document.getElementById("table1").rows[4].cells;
+                        a[1].style.color = "Black";
+                        a[1].bgColor = "transparent";
+                    }else {
+                        var status4 = "TRIP";
+                        var MCCB4_59001_Status = status4;
+                        var a = document.getElementById("table1").rows[4].cells;
+                        a[1].style.color = "Black";
+                        a[1].bgColor = "Yellow";
+                    }
+
+                    if (result == 59001) {
+                            document.getElementById('table1').style.display = '';
+                            var a = document.getElementById("table1").rows[1].cells;
+                            var b = document.getElementById("table1").rows[2].cells;
+                            var c = document.getElementById("table1").rows[3].cells;
+                            var d = document.getElementById("table1").rows[4].cells;
+                            var e = document.getElementById("table1").rows[5].cells;
+                            var f = document.getElementById("table1").rows[6].cells;
+                            var g = document.getElementById("table1").rows[7].cells;
+                            var h = document.getElementById("table1").rows[8].cells;
+                            var i = document.getElementById("table1").rows[9].cells;
+                            var j = document.getElementById("table1").rows[10].cells;
+                            var k = document.getElementById("table1").rows[11].cells;
+                            var l = document.getElementById("table1").rows[12].cells;
+                            var m = document.getElementById("table1").rows[13].cells;
+
+                            a[1].innerHTML = status1 + " (" + result + ")";
+                            b[1].innerHTML = status2 + " (" + result + ")";
+                            c[1].innerHTML = status3 + " (" + result + ")";
+                            d[1].innerHTML = status4 + " (" + result + ")";
+                            e[1].innerHTML = Power1_status + " kWh" + " (" + result + ")";
+                            f[1].innerHTML = Power1_status + " kWh" + " (" + result + ")";
+                            g[1].innerHTML = Power1_status + " kWh" + " (" + result + ")";
+                            h[1].innerHTML = Power1_status + " kWh" + " (" + result + ")";
+                            i[1].innerHTML = Temperature1_status + " Degree" + " (" + result + ")";
+                            j[1].innerHTML = Temperature2_status + " Degree" + " (" + result + ")";
+                            k[1].innerHTML = Temperature3_status + " Degree" + " (" + result + ")";
+                            l[1].innerHTML = Temperature4_status + " Degree" + " (" + result + ")";
+                            m[1].innerHTML = Temperature5_status + " Degree" + " (" + result + ")";
+                    } else {
+
+                        document.getElementById('table1').style.display = '';
+
+                        var a = document.getElementById("table1").rows[1].cells;
+                        var b = document.getElementById("table1").rows[2].cells;
+                        var c = document.getElementById("table1").rows[3].cells;
+                        var d = document.getElementById("table1").rows[4].cells;
+                        var e = document.getElementById("table1").rows[5].cells;
+                        var f = document.getElementById("table1").rows[6].cells;
+                        var g = document.getElementById("table1").rows[7].cells;
+                        var h = document.getElementById("table1").rows[8].cells;
+                        var i = document.getElementById("table1").rows[9].cells;
+                        var j = document.getElementById("table1").rows[10].cells;
+                        var k = document.getElementById("table1").rows[11].cells;
+                        var l = document.getElementById("table1").rows[12].cells;
+                        var m = document.getElementById("table1").rows[13].cells;
+
+                        a[1].innerHTML = "not connected" + " (" + result + ")";
+                        b[1].innerHTML = "not connected" + " (" + result + ")";
+                        c[1].innerHTML = "not connected" + " (" + result + ")";
+                        d[1].innerHTML = "not connected" + " (" + result + ")";
+                        e[1].innerHTML = "not connected"  + " (" + result + ")";
+                        f[1].innerHTML = "not connected"  + " (" + result + ")";
+                        g[1].innerHTML = "not connected"  + " (" + result + ")";
+                        h[1].innerHTML = "not connected"  + " (" + result + ")";
+                        i[1].innerHTML = "not connected"  + " (" + result + ")";
+                        j[1].innerHTML = "not connected"  + " (" + result + ")";
+                        k[1].innerHTML = "not connected"  + " (" + result + ")";
+                        l[1].innerHTML = "not connected"  + " (" + result + ")";
+                        m[1].innerHTML = "not connected" + " (" + result + ")";
+
+                        }
+                }
+
+                    function processUser() {
+
+                        var parameters = location.search.substring(1).split("&");
+
+                        var temp = parameters[0].split("=");
+                        l = unescape(temp[1]);
+                        temp = parameters[1].split("=");
+                        p = unescape(temp[1]);
+                        document.getElementById("log").innerHTML = l;
+                        document.getElementById("pass").innerHTML = p;
+                    }
+
+                    function passValue() {
+
+                        GetSelectedValue();
+                        var t = document.getElementById("DeviceId");
+
+                        var selection = t.options[t.selectedIndex].value;
+                        var a = MCCB1_59001_Status;
+                        //var b = MCCB2_59001_Status;
+                        //var c = MCCB3_59001_Status;
+                        //var d = MCCB4_59001_Status;
+
+                        if (selection == 59001) {
+                            document.getElementById("a").value = a;
+                        //    document.getElementById("b").value = b;
+                        //    document.getElementById("c").value = c;
+                        //    document.getElementById("d").value = d;
+                        } else {
+                            document.getElementById("a").value = "N";
+                        //    document.getElementById("b").value = "N";
+                        //    document.getElementById("c").value = "N";
+                        //    document.getElementById("d").value = "N";
+                        }
+                    }
+
+        
+            </script>
+
+            <table id="table1" class="table">
+
+                <tr>
+                    <th>Sensor Name</th>
+                    <th>Current Status</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td> MCCB1 (Location)</td>
+                    <td> H </td>
+                    <td><form action="Home/MCCB"><input type="hidden" name="1" value="9999" id="a" />
+                        <button id="Button1" onclick="passValue()" class="float-right submit-button">More Details ></button></form> </td>
+                </tr>
+                <tr>
+                    <td> MCCB2 (Location)</td>
+                    <td> G </td>
+                    <td><form action="Home/MCCB"><input type="hidden" name="2" value="9999" id="b" />
+                        <button id="Button2" onclick="passValue()" class="float-right submit-button">></button></form> </td>
+                </tr>
+                <tr>
+                    <td> MCCB3 (Location) </td>
+                    <td> <script> MCCB3_status </script> KKKKK </td>
+                    <td><button id="Button3" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td> MCCB4 (Location) </td>
+                    <td> <script> MCCB4_status </script>AAAAAA </td>
+                    <td><button id="Button3" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td>Power Meter1 (Location) </td>
+                    <td>Power1_status kWh</td>
+                    <td><button id="Button4" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td> Power Meter2 (Location) </td>
+                    <td>Power2_status kWh</td>
+                    <td><button id="Button5" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td> Power Meter3 (Location) </td>
+                    <td>Power3_status kWh</td>
+                    <td><button id="Button6" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td> Power Meter4 (Location) </td>
+                    <td>Power4_status kWh</td>
+                    <td><button id="Button7" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td> Temperature1 </td>
+                    <td>Temperature1_status Degree</td>
+                    <td><button id="Button12" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td> Temperature2 </td>
+                    <td>Temperature2_status Degree</td>
+                    <td><button id="Button13" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td> Temperature3 </td>
+                    <td>Temperature3_status Degree</td>
+                    <td><button id="Button14" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td>  Temperature4 </td>
+                    <td>Temperature4_status Degree</td>
+                    <td><button id="Button15" class="float-right submit-button">></button></td>
+                </tr>
+                <tr>
+                    <td>  Temperature5 </td>
+                    <td>Temperature5_status Degree</td>
+                    <td><button id="Button16" class="float-right submit-button">></button></td>
+                </tr>
+            </table>
+
+                
+
+                <script type="text/javascript">
+                    document.getElementById("Button2").onclick = function () {
+                        location.href = "https://localhost:44300/Home/MCCB";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button3").onclick = function () {
+                        location.href = "https://localhost:44300/Home/MCCB";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button4").onclick = function () {
+                        location.href = "https://localhost:44300/Home/PowerMeter";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button5").onclick = function () {
+                        location.href = "https://localhost:44300/Home/PowerMeter";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button6").onclick = function () {
+                        location.href = "https://localhost:44300/Home/PowerMeter";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button7").onclick = function () {
+                        location.href = "https://localhost:44300/Home/PowerMeter";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button8").onclick = function () {
+                        location.href = "https://localhost:44300/Home/PowerMeter";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button9").onclick = function () {
+                        location.href = "https://localhost:44300/Home/PowerMeter";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button10").onclick = function () {
+                        location.href = "https://localhost:44300/Home/PowerMeter";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button11").onclick = function () {
+                        location.href = "https://localhost:44300/Home/PowerMeter";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button12").onclick = function () {
+                        location.href = "https://localhost:44300/Home/Temperature";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button13").onclick = function () {
+                        location.href = "https://localhost:44300/Home/Temperature";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button14").onclick = function () {
+                        location.href = "https://localhost:44300/Home/Temperature";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button15").onclick = function () {
+                        location.href = "https://localhost:44300/Home/Temperature";
+                    };
+                </script>
+                <script type="text/javascript">
+                    document.getElementById("Button16").onclick = function () {
+                        location.href = "https://localhost:44300/Home/Temperature";
+                    };
+                </script>
+        </body>
+    </html>
+
+    @*<p> GGSignal UI Design Reference from <a href="https://docs.google.com/presentation/d/1cWKKo3J0GtAO7VOFfY4-eVmpzpmMEum0RLK2v8Cfou8/edit#slide=id.p">here</a>.</p>*@
+
+    </div>

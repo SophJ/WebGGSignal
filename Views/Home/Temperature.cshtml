@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Temperature";
+}
+<h3 class="display-4">@ViewData["Title"]</h3>
+
+<!DOCTYPE html>
+<html>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<body>
+
+    <style>
+        body {
+            background-color: ghostwhite;
+        }
+    </style>
+
+    <h4>Detail data - Temperature</h4>
+
+    <label for="Temperature">Select Temperature:</label>
+
+    <select id="Temperatures" class="form-control sprites-arrow-down" onchange="GetSelectedValue()">
+        <option value="none" selected disabled hidden>
+            Select an Option
+        </option>
+        <option value="Temperature1">Temperature (L1-cb3 live bar)</option>
+        <option value="Temperature2">Temperature (L2- db2- 3 neutral)</option>
+        <option value="Temperature3">Temperature (L3- ph1 live)</option>
+        <option value="Temperature4">Temperature (L4- Local Station)</option>
+        <option value="Temperature5">Temperature (L5- db2- 3 neutral)</option>
+    </select>
+
+
+
+    <script>
+
+          var Temperature1_status = @Model.T1
+    var Temperature2_status = @Model.T2
+    var Temperature3_status = @Model.T3
+    var Temperature4_status = @Model.T4
+    var Temperature5_status = @Model.T5
+
+        function GetSelectedValue() {
+            var e = document.getElementById("Temperatures");
+            var result = e.options[e.selectedIndex].value;
+
+            var y = document.getElementById("DynamicTable").rows[2].cells;
+            //y[1].innerHTML = d;
+
+            var a = document.getElementById("StaticTable").rows[1].cells;
+            var b = document.getElementById("StaticTable").rows[2].cells;
+            var str1 = "From MSSQL --- ";
+            var str2 = "From MSSQLS --- ";
+
+            a[1].innerHTML = str1.concat(result);
+            b[1].innerHTML = str2.concat(result);
+
+            if (result == "Temperature1") {
+
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = Temperature1_status + " (" + result + ")";
+
+            } else if (result == "Temperature2") {
+
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = Temperature2_status + " (" + result + ")";
+
+            } else if (result == "Temperature3") {
+
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = Temperature3_status + " (" + result + ")";
+
+            } else if (result == "Temperature4") {
+
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = Temperature4_status + " (" + result + ")";
+
+            } else if (result == "Temperature5") {
+
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = Temperature5_status + " (" + result + ")";
+
+            }
+        }
+
+
+    </script>
+
+    <br />
+    <br />
+
+    <table id="DynamicTable">
+
+        <tr>
+            <th>Dynamic Data</th>
+        </tr>
+
+        <tr>
+            <td>Current Temperature (Degree):</td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>Highest Temperature (Last 24 hrs):</td>
+            <td> To be Continued </td>
+        </tr>
+
+    </table>
+
+    <table id="StaticTable">
+
+        <tr>
+            <th>Static Data</th>
+        </tr>
+
+        <tr>
+            <td>Device serial no.:</td>
+            <td>6546g456456b</td>
+        </tr>
+        <tr>
+            <td>Location :</td>
+            <td>L1-DB 2</td>
+        </tr>
+
+    </table>
+
+</body>
+</html>
