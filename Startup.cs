@@ -24,6 +24,13 @@ namespace WebGGSignal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                //"/Home/welcome" is the page we want to land at
+                //The empty string signifies the root URL   
+
+                options.Conventions.AddPageRoute("/Home/", "");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
