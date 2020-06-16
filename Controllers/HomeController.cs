@@ -19,7 +19,7 @@ namespace WebGGSignal.Controllers
 
         ReadingResultModel reading = new ReadingResultModel();
 
-        private static Timer aTimer;
+        //private static Timer aTimer;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -29,18 +29,33 @@ namespace WebGGSignal.Controllers
         public async Task<IActionResult> IndexAsync()
         {
 
-            string startDate = "2020-05-18";
-            string endDate = "2020-05-19";
+            // [Current Time - 5 min] to [Current Time]
+            string startDate = "2020-01-01";
+            string endDate = "2020-01-02";
 
-            //string startDate = "2020-01-01"; 
-            //string endDate = "2020-01-02";
+            // 1677-09-21 00:12:43.145224194
+            // 2017-11-09T00:00:00.000Z
+            // DateTime localDate = DateTime.Now;
+            DateTime utcDate = DateTime.UtcNow;
+            Console.WriteLine("======================");
+            Console.WriteLine(utcDate.ToString());
+
+            //startDate = [Current Time - 5 min]
+            //endDate = [Current Time]
+            startDate = utcDate.AddMinutes(-5).ToString("yyyy-MM-ddTHH:mm:ss.000Z");
+            endDate = utcDate.ToString("yyyy-MM-ddTHH:mm:ss.000Z");
+
+            // Console.WriteLine(utcDate.ToString("yyyy-MM-ddTHH:mm:ss.000Z"));
+            // Console.WriteLine(utcDate.AddMinutes(-5).ToString("yyyy-MM-ddTHH:mm:ss.000Z"));
+            Console.WriteLine(startDate);
+            Console.WriteLine(endDate);
+            Console.WriteLine("======================");
 
             _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
 
             //MCCB1
-            var query1 = string.Format("select (\"MCCB1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query1 = string.Format("select (\"MCCB1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time <='" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results1 = await _client.QueryAsync("MCCBSensors", query1);
-
          
             //_client = new InfluxDb("http://sdbinflux.southeastasia.cloudapp.azure.com:8086/", "API", "API2212");
             //var query = string.Format("select SUM(\"RealPower\") from HourlyReadings WHERE DeviceId = '8520'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
@@ -55,8 +70,13 @@ namespace WebGGSignal.Controllers
 
             if (results1[0].Values.Count() > 0)
             {
+                var temp_index = results1[0].Values.Count();
                 //reading.RealPower = float.Parse(results[0].Values[0][1].ToString());
-                reading.MCCB1 = float.Parse(results1[0].Values[0][1].ToString());
+                reading.MCCB1 = float.Parse(results1[0].Values[temp_index-1][1].ToString());   // 
+                Console.WriteLine("+++++++++++++++++++++++");
+                Console.WriteLine(results1[0].Values[temp_index-1][0]);
+                Console.WriteLine(results1[0].Values[temp_index-1][1]);
+                Console.WriteLine("+++++++++++++++++++++++");
                 reading.Status = 1;
 
             }
@@ -72,8 +92,8 @@ namespace WebGGSignal.Controllers
 
             if (results2[0].Values.Count() > 0)
             {
-      
-                reading.MCCB3 = float.Parse(results2[0].Values[0][1].ToString());
+                var temp_index = results2[0].Values.Count();
+                reading.MCCB2 = float.Parse(results2[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -89,8 +109,8 @@ namespace WebGGSignal.Controllers
 
             if (results3[0].Values.Count() > 0)
             {
-        
-                reading.MCCB3 = float.Parse(results3[0].Values[0][1].ToString());
+                var temp_index = results3[0].Values.Count();
+                reading.MCCB3 = float.Parse(results3[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -106,8 +126,8 @@ namespace WebGGSignal.Controllers
 
             if (results4[0].Values.Count() > 0)
             {
-
-                reading.MCCB4 = float.Parse(results4[0].Values[0][1].ToString());
+                var temp_index = results4[0].Values.Count();
+                reading.MCCB4 = float.Parse(results4[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -123,8 +143,8 @@ namespace WebGGSignal.Controllers
 
             if (results5[0].Values.Count() > 0)
             {
-       
-                reading.T1 = float.Parse(results5[0].Values[0][1].ToString());
+                var temp_index = results5[0].Values.Count();
+                reading.T1 = float.Parse(results5[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -140,8 +160,8 @@ namespace WebGGSignal.Controllers
 
             if (results6[0].Values.Count() > 0)
             {
-         
-                reading.T2 = float.Parse(results6[0].Values[0][1].ToString());
+                var temp_index = results6[0].Values.Count();
+                reading.T2 = float.Parse(results6[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -157,8 +177,8 @@ namespace WebGGSignal.Controllers
 
             if (results7[0].Values.Count() > 0)
             {
-             
-                reading.T3 = float.Parse(results7[0].Values[0][1].ToString());
+                var temp_index = results7[0].Values.Count();
+                reading.T3 = float.Parse(results7[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -174,8 +194,8 @@ namespace WebGGSignal.Controllers
 
             if (results8[0].Values.Count() > 0)
             {
-             
-                reading.T4 = float.Parse(results8[0].Values[0][1].ToString());
+                var temp_index = results8[0].Values.Count();
+                reading.T4 = float.Parse(results8[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -191,8 +211,8 @@ namespace WebGGSignal.Controllers
 
             if (results9[0].Values.Count() > 0)
             {
-             
-                reading.T5 = float.Parse(results9[0].Values[0][1].ToString());
+                var temp_index = results9[0].Values.Count();
+                reading.T5 = float.Parse(results9[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -208,8 +228,8 @@ namespace WebGGSignal.Controllers
 
             if (results10[0].Values.Count() > 0)
             {
-
-                reading.TotalKWhCH1 = float.Parse(results10[0].Values[0][1].ToString());
+                var temp_index = results10[0].Values.Count();
+                reading.TotalKWhCH1 = float.Parse(results10[0].Values[temp_index -1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -225,8 +245,8 @@ namespace WebGGSignal.Controllers
 
             if (results11[0].Values.Count() > 0)
             {
-
-                reading.TotalKWhCH1 = float.Parse(results11[0].Values[0][1].ToString());
+                var temp_index = results11[0].Values.Count();
+                reading.TotalKWhCH1 = float.Parse(results11[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -242,8 +262,8 @@ namespace WebGGSignal.Controllers
 
             if (results12[0].Values.Count() > 0)
             {
-
-                reading.TotalKWhCH1 = float.Parse(results12[0].Values[0][1].ToString());
+                var temp_index = results12[0].Values.Count();
+                reading.TotalKWhCH1 = float.Parse(results12[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -259,8 +279,8 @@ namespace WebGGSignal.Controllers
 
             if (results13[0].Values.Count() > 0)
             {
-
-                reading.TotalKWhCH1 = float.Parse(results13[0].Values[0][1].ToString());
+                var temp_index = results13[0].Values.Count();
+                reading.TotalKWhCH1 = float.Parse(results13[0].Values[temp_index -1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -270,10 +290,19 @@ namespace WebGGSignal.Controllers
 
         }
 
-        public async Task<IActionResult>  MCCBAsync()
+        public async Task<IActionResult> MCCBAsync()
         {
             string startDate = "2020-05-18";
             string endDate = "2020-05-19";
+
+            DateTime utcDate = DateTime.UtcNow;
+            Console.WriteLine("======================");
+            Console.WriteLine(utcDate.ToString());
+
+            //startDate = [Current Time - 5 min]
+            //endDate = [Current Time]
+            startDate = utcDate.AddMinutes(-5).ToString("yyyy-MM-ddTHH:mm:ss.000Z");
+            endDate = utcDate.ToString("yyyy-MM-ddTHH:mm:ss.000Z");
 
             _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
 
@@ -288,8 +317,8 @@ namespace WebGGSignal.Controllers
 
             if (results1[0].Values.Count() > 0)
             {
-                //reading.RealPower = float.Parse(results[0].Values[0][1].ToString());
-                reading.MCCB1 = float.Parse(results1[0].Values[0][1].ToString());
+                var temp_index = results1[0].Values.Count();
+                reading.MCCB1 = float.Parse(results1[0].Values[temp_index -1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -305,8 +334,8 @@ namespace WebGGSignal.Controllers
 
             if (results2[0].Values.Count() > 0)
             {
-
-                reading.MCCB3 = float.Parse(results2[0].Values[0][1].ToString());
+                var temp_index = results2[0].Values.Count();
+                reading.MCCB2 = float.Parse(results2[0].Values[temp_index -1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -322,8 +351,8 @@ namespace WebGGSignal.Controllers
 
             if (results3[0].Values.Count() > 0)
             {
-
-                reading.MCCB3 = float.Parse(results3[0].Values[0][1].ToString());
+                var temp_index = results3[0].Values.Count();
+                reading.MCCB3 = float.Parse(results3[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -339,8 +368,8 @@ namespace WebGGSignal.Controllers
 
             if (results4[0].Values.Count() > 0)
             {
-
-                reading.MCCB4 = float.Parse(results4[0].Values[0][1].ToString());
+                var temp_index = results4[0].Values.Count();
+                reading.MCCB4 = float.Parse(results4[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -352,6 +381,15 @@ namespace WebGGSignal.Controllers
         {
             string startDate = "2020-05-18";
             string endDate = "2020-05-19";
+
+            DateTime utcDate = DateTime.UtcNow;
+            Console.WriteLine("======================");
+            Console.WriteLine(utcDate.ToString());
+
+            //startDate = [Current Time - 5 min]
+            //endDate = [Current Time]
+            startDate = utcDate.AddMinutes(-5).ToString("yyyy-MM-ddTHH:mm:ss.000Z");
+            endDate = utcDate.ToString("yyyy-MM-ddTHH:mm:ss.000Z");
 
             _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
 
@@ -366,8 +404,8 @@ namespace WebGGSignal.Controllers
 
             if (results10[0].Values.Count() > 0)
             {
-
-                reading.TotalKWhCH1 = float.Parse(results10[0].Values[0][1].ToString());
+                var temp_index = results10[0].Values.Count();
+                reading.TotalKWhCH1 = float.Parse(results10[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -383,8 +421,8 @@ namespace WebGGSignal.Controllers
 
             if (results14[0].Values.Count() > 0)
             {
-
-                reading.Va1 = float.Parse(results14[0].Values[0][1].ToString());
+                var temp_index = results14[0].Values.Count();
+                reading.Va1 = float.Parse(results14[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -400,8 +438,8 @@ namespace WebGGSignal.Controllers
 
             if (results15[0].Values.Count() > 0)
             {
-
-                reading.Vb1 = float.Parse(results15[0].Values[0][1].ToString());
+                var temp_index = results15[0].Values.Count();
+                reading.Vb1 = float.Parse(results15[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -417,8 +455,8 @@ namespace WebGGSignal.Controllers
 
             if (results16[0].Values.Count() > 0)
             {
-
-                reading.Vc1 = float.Parse(results16[0].Values[0][1].ToString());
+                var temp_index = results16[0].Values.Count();
+                reading.Vc1 = float.Parse(results16[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -434,8 +472,8 @@ namespace WebGGSignal.Controllers
 
             if (results17[0].Values.Count() > 0)
             {
-
-                reading.Ia1 = float.Parse(results17[0].Values[0][1].ToString());
+                var temp_index = results17[0].Values.Count();
+                reading.Ia1 = float.Parse(results17[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -451,8 +489,8 @@ namespace WebGGSignal.Controllers
 
             if (results18[0].Values.Count() > 0)
             {
-
-                reading.Ib1 = float.Parse(results18[0].Values[0][1].ToString());
+                var temp_index = results18[0].Values.Count();
+                reading.Ib1 = float.Parse(results18[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -468,8 +506,8 @@ namespace WebGGSignal.Controllers
 
             if (results19[0].Values.Count() > 0)
             {
-
-                reading.Ic1 = float.Parse(results19[0].Values[0][1].ToString());
+                var temp_index = results19[0].Values.Count();
+                reading.Ic1 = float.Parse(results19[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -485,8 +523,8 @@ namespace WebGGSignal.Controllers
 
             if (results11[0].Values.Count() > 0)
             {
-
-                reading.TotalKWhCH1 = float.Parse(results11[0].Values[0][1].ToString());
+                var temp_index = results11[0].Values.Count();
+                reading.TotalKWhCH1 = float.Parse(results11[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -502,8 +540,8 @@ namespace WebGGSignal.Controllers
 
             if (results20[0].Values.Count() > 0)
             {
-
-                reading.Va2 = float.Parse(results20[0].Values[0][1].ToString());
+                var temp_index = results20[0].Values.Count();
+                reading.Va2 = float.Parse(results20[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -519,8 +557,8 @@ namespace WebGGSignal.Controllers
 
             if (results21[0].Values.Count() > 0)
             {
-
-                reading.Vb2 = float.Parse(results21[0].Values[0][1].ToString());
+                var temp_index = results21[0].Values.Count();
+                reading.Vb2 = float.Parse(results21[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -536,8 +574,8 @@ namespace WebGGSignal.Controllers
 
             if (results22[0].Values.Count() > 0)
             {
-
-                reading.Vc2 = float.Parse(results22[0].Values[0][1].ToString());
+                var temp_index = results22[0].Values.Count();
+                reading.Vc2 = float.Parse(results22[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -553,8 +591,8 @@ namespace WebGGSignal.Controllers
 
             if (results23[0].Values.Count() > 0)
             {
-
-                reading.Ia2 = float.Parse(results23[0].Values[0][1].ToString());
+                var temp_index = results23[0].Values.Count();
+                reading.Ia2 = float.Parse(results23[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -570,8 +608,8 @@ namespace WebGGSignal.Controllers
 
             if (results24[0].Values.Count() > 0)
             {
-
-                reading.Ib2 = float.Parse(results24[0].Values[0][1].ToString());
+                var temp_index = results24[0].Values.Count();
+                reading.Ib2 = float.Parse(results24[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -587,8 +625,8 @@ namespace WebGGSignal.Controllers
 
             if (results25[0].Values.Count() > 0)
             {
-
-                reading.Ic2 = float.Parse(results25[0].Values[0][1].ToString());
+                var temp_index = results25[0].Values.Count();
+                reading.Ic2 = float.Parse(results25[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -605,8 +643,8 @@ namespace WebGGSignal.Controllers
 
             if (results12[0].Values.Count() > 0)
             {
-
-                reading.TotalKWhCH1 = float.Parse(results12[0].Values[0][1].ToString());
+                var temp_index = results12[0].Values.Count();
+                reading.TotalKWhCH1 = float.Parse(results12[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -622,8 +660,8 @@ namespace WebGGSignal.Controllers
 
             if (results26[0].Values.Count() > 0)
             {
-
-                reading.Va1 = float.Parse(results26[0].Values[0][1].ToString());
+                var temp_index = results26[0].Values.Count();
+                reading.Va1 = float.Parse(results26[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -639,8 +677,8 @@ namespace WebGGSignal.Controllers
 
             if (results27[0].Values.Count() > 0)
             {
-
-                reading.Vb1 = float.Parse(results27[0].Values[0][1].ToString());
+                var temp_index = results27[0].Values.Count();
+                reading.Vb1 = float.Parse(results27[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -656,8 +694,8 @@ namespace WebGGSignal.Controllers
 
             if (results28[0].Values.Count() > 0)
             {
-
-                reading.Vc1 = float.Parse(results28[0].Values[0][1].ToString());
+                var temp_index = results28[0].Values.Count();
+                reading.Vc1 = float.Parse(results28[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -673,8 +711,8 @@ namespace WebGGSignal.Controllers
 
             if (results29[0].Values.Count() > 0)
             {
-
-                reading.Ia1 = float.Parse(results29[0].Values[0][1].ToString());
+                var temp_index = results29[0].Values.Count();
+                reading.Ia1 = float.Parse(results29[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -690,8 +728,8 @@ namespace WebGGSignal.Controllers
 
             if (results30[0].Values.Count() > 0)
             {
-
-                reading.Ib1 = float.Parse(results30[0].Values[0][1].ToString());
+                var temp_index = results30[0].Values.Count();
+                reading.Ib1 = float.Parse(results30[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -707,8 +745,8 @@ namespace WebGGSignal.Controllers
 
             if (results31[0].Values.Count() > 0)
             {
-
-                reading.Ic1 = float.Parse(results31[0].Values[0][1].ToString());
+                var temp_index = results31[0].Values.Count();
+                reading.Ic1 = float.Parse(results31[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -725,8 +763,8 @@ namespace WebGGSignal.Controllers
 
             if (results13[0].Values.Count() > 0)
             {
-
-                reading.TotalKWhCH1 = float.Parse(results13[0].Values[0][1].ToString());
+                var temp_index = results13[0].Values.Count();
+                reading.TotalKWhCH1 = float.Parse(results13[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -742,8 +780,8 @@ namespace WebGGSignal.Controllers
 
             if (results32[0].Values.Count() > 0)
             {
-
-                reading.Va1 = float.Parse(results32[0].Values[0][1].ToString());
+                var temp_index = results32[0].Values.Count();
+                reading.Va1 = float.Parse(results32[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -759,8 +797,8 @@ namespace WebGGSignal.Controllers
 
             if (results33[0].Values.Count() > 0)
             {
-
-                reading.Vb1 = float.Parse(results33[0].Values[0][1].ToString());
+                var temp_index = results33[0].Values.Count();
+                reading.Vb1 = float.Parse(results33[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -776,8 +814,8 @@ namespace WebGGSignal.Controllers
 
             if (results34[0].Values.Count() > 0)
             {
-
-                reading.Vc1 = float.Parse(results34[0].Values[0][1].ToString());
+                var temp_index = results34[0].Values.Count();
+                reading.Vc1 = float.Parse(results34[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -793,8 +831,8 @@ namespace WebGGSignal.Controllers
 
             if (results35[0].Values.Count() > 0)
             {
-
-                reading.Ia1 = float.Parse(results35[0].Values[0][1].ToString());
+                var temp_index = results35[0].Values.Count();
+                reading.Ia1 = float.Parse(results35[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -810,8 +848,8 @@ namespace WebGGSignal.Controllers
 
             if (results36[0].Values.Count() > 0)
             {
-
-                reading.Ib1 = float.Parse(results36[0].Values[0][1].ToString());
+                var temp_index = results36[0].Values.Count();
+                reading.Ib1 = float.Parse(results36[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -827,8 +865,8 @@ namespace WebGGSignal.Controllers
 
             if (results37[0].Values.Count() > 0)
             {
-
-                reading.Ic1 = float.Parse(results37[0].Values[0][1].ToString());
+                var temp_index = results37[0].Values.Count();
+                reading.Ic1 = float.Parse(results37[0].Values[temp_index - 1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -840,6 +878,15 @@ namespace WebGGSignal.Controllers
         {
             string startDate = "2020-05-18";
             string endDate = "2020-05-19";
+
+            DateTime utcDate = DateTime.UtcNow;
+            Console.WriteLine("======================");
+            Console.WriteLine(utcDate.ToString());
+
+            //startDate = [Current Time - 5 min]
+            //endDate = [Current Time]
+            startDate = utcDate.AddMinutes(-5).ToString("yyyy-MM-ddTHH:mm:ss.000Z");
+            endDate = utcDate.ToString("yyyy-MM-ddTHH:mm:ss.000Z");
 
             _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
 
