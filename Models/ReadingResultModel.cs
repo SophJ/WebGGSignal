@@ -9,18 +9,18 @@ namespace WebGGSignal.Models
     public class ReadingResultModel
     {
 
-        public float MCCB1 { get; set; }
-        public float MCCB2 { get; set; }
-        public float MCCB3 { get; set; }
-        public float MCCB4 { get; set; }
+        public float MCCB1 { get; set; } = 0;
+        public float MCCB2 { get; set; } = 0;
+        public float MCCB3 { get; set; } = 0;
+        public float MCCB4 { get; set; } = 0;
 
-        public float T1 { get; set; }
-        public float T2 { get; set; }
-        public float T3 { get; set; }
-        public float T4 { get; set; }
-        public float T5 { get; set; }
+        public float T1 { get; set; } = 0;
+        public float T2 { get; set; } = 0;
+        public float T3 { get; set; } = 0;
+        public float T4 { get; set; } = 0;
+        public float T5 { get; set; } = 0;
 
-        public float TotalKWhCH1 { get; set; }
+        public float TotalKWhCH1 { get; set; } = 0;
 
         //public float TotalKWhCH2 { get; set; }
 
@@ -28,23 +28,23 @@ namespace WebGGSignal.Models
 
         //public float TotalKWhCH4 { get; set; }
 
-        public float Ia1 { get; set; }
-        public float Ib1 { get; set; }
-        public float Ic1 { get; set; }
+        public float Ia1 { get; set; } = 0;
+        public float Ib1 { get; set; } = 0;
+        public float Ic1 { get; set; } = 0;
 
-        public float Va1 { get; set; }
-        public float Vb1 { get; set; }
-        public float Vc1 { get; set; }
+        public float Va1 { get; set; } = 0;
+        public float Vb1 { get; set; } = 0;
+        public float Vc1 { get; set; } = 0;
 
-        public float Ia2 { get; set; }
-        public float Ib2 { get; set; }
-        public float Ic2 { get; set; }
+        public float Ia2 { get; set; } = 0;
+        public float Ib2 { get; set; } = 0;
+        public float Ic2 { get; set; } = 0;
 
-        public float Va2 { get; set; }
-        public float Vb2 { get; set; }
-        public float Vc2 { get; set; }
+        public float Va2 { get; set; } = 0;
+        public float Vb2 { get; set; } = 0;
+        public float Vc2 { get; set; } = 0;
 
-       // public float Ia3 { get; set; }
+        // public float Ia3 { get; set; }
         //public float Ib3 { get; set; }
         //public float Ic3 { get; set; }
 

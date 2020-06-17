@@ -30,8 +30,8 @@ namespace WebGGSignal.Controllers
         {
 
             // [Current Time - 5 min] to [Current Time]
-            string startDate = "2020-01-01";
-            string endDate = "2020-01-02";
+            string startDate = "2020-06-16";
+            string endDate = "2020-06-17";
 
             // 1677-09-21 00:12:43.145224194
             // 2017-11-09T00:00:00.000Z
@@ -63,12 +63,13 @@ namespace WebGGSignal.Controllers
 
             if (results1.Count == 0)
             {
-                return BadRequest();
+                reading.MCCB1 = 0;
+                reading.Status = 1;
             }
 
             //ReadingResultModel reading = new ReadingResultModel();
 
-            if (results1[0].Values.Count() > 0)
+            if (results1.Count >0 && results1[0].Values.Count() > 0)
             {
                 var temp_index = results1[0].Values.Count();
                 //reading.RealPower = float.Parse(results[0].Values[0][1].ToString());
@@ -85,12 +86,9 @@ namespace WebGGSignal.Controllers
             var query2 = string.Format("select (\"MCCB2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results2 = await _client.QueryAsync("MCCBSensors", query2);
 
-            if (results2.Count == 0)
-            {
-                return BadRequest();
-            }
+    
 
-            if (results2[0].Values.Count() > 0)
+            if (results2.Count > 0 && results2[0].Values.Count() > 0)
             {
                 var temp_index = results2[0].Values.Count();
                 reading.MCCB2 = float.Parse(results2[0].Values[temp_index - 1][1].ToString());
@@ -102,12 +100,8 @@ namespace WebGGSignal.Controllers
             var query3 = string.Format("select (\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results3 = await _client.QueryAsync("MCCBSensors", query3);
 
-            if (results3.Count == 0)
-            {
-                return BadRequest();
-            }
 
-            if (results3[0].Values.Count() > 0)
+            if (results3.Count > 0 && results3[0].Values.Count() > 0)
             {
                 var temp_index = results3[0].Values.Count();
                 reading.MCCB3 = float.Parse(results3[0].Values[temp_index - 1][1].ToString());
@@ -119,12 +113,9 @@ namespace WebGGSignal.Controllers
             var query4 = string.Format("select (\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results4 = await _client.QueryAsync("MCCBSensors", query4);
 
-            if (results4.Count == 0)
-            {
-                return BadRequest();
-            }
+      
 
-            if (results4[0].Values.Count() > 0)
+            if (results4.Count > 0 && results4[0].Values.Count() > 0)
             {
                 var temp_index = results4[0].Values.Count();
                 reading.MCCB4 = float.Parse(results4[0].Values[temp_index - 1][1].ToString());
@@ -136,12 +127,9 @@ namespace WebGGSignal.Controllers
             var query5 = string.Format("select (\"T1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results5 = await _client.QueryAsync("MCCBSensors", query5);
 
-            if (results5.Count == 0)
-            {
-                return BadRequest();
-            }
+         
 
-            if (results5[0].Values.Count() > 0)
+            if (results5.Count > 0 && results5[0].Values.Count() > 0)
             {
                 var temp_index = results5[0].Values.Count();
                 reading.T1 = float.Parse(results5[0].Values[temp_index - 1][1].ToString());
@@ -153,12 +141,8 @@ namespace WebGGSignal.Controllers
             var query6 = string.Format("select (\"T2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results6 = await _client.QueryAsync("MCCBSensors", query6);
 
-            if (results6.Count == 0)
-            {
-                return BadRequest();
-            }
 
-            if (results6[0].Values.Count() > 0)
+            if (results6.Count > 0 && results6[0].Values.Count() > 0)
             {
                 var temp_index = results6[0].Values.Count();
                 reading.T2 = float.Parse(results6[0].Values[temp_index - 1][1].ToString());
@@ -170,12 +154,7 @@ namespace WebGGSignal.Controllers
             var query7 = string.Format("select (\"T3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results7 = await _client.QueryAsync("MCCBSensors", query7);
 
-            if (results7.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results7[0].Values.Count() > 0)
+            if (results7.Count > 0 && results7[0].Values.Count() > 0)
             {
                 var temp_index = results7[0].Values.Count();
                 reading.T3 = float.Parse(results7[0].Values[temp_index - 1][1].ToString());
@@ -187,12 +166,8 @@ namespace WebGGSignal.Controllers
             var query8 = string.Format("select (\"T4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results8 = await _client.QueryAsync("MCCBSensors", query8);
 
-            if (results8.Count == 0)
-            {
-                return BadRequest();
-            }
 
-            if (results8[0].Values.Count() > 0)
+            if (results8.Count > 0 && results8[0].Values.Count() > 0)
             {
                 var temp_index = results8[0].Values.Count();
                 reading.T4 = float.Parse(results8[0].Values[temp_index - 1][1].ToString());
@@ -204,12 +179,7 @@ namespace WebGGSignal.Controllers
             var query9 = string.Format("select (\"T5\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results9 = await _client.QueryAsync("MCCBSensors", query9);
 
-            if (results9.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results9[0].Values.Count() > 0)
+            if (results9.Count > 0 && results9[0].Values.Count() > 0)
             {
                 var temp_index = results9[0].Values.Count();
                 reading.T5 = float.Parse(results9[0].Values[temp_index - 1][1].ToString());
@@ -221,12 +191,7 @@ namespace WebGGSignal.Controllers
             var query10 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results10 = await _client.QueryAsync("MCCBSensors", query10);
 
-            if (results10.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results10[0].Values.Count() > 0)
+            if (results10.Count > 0 && results10[0].Values.Count() > 0)
             {
                 var temp_index = results10[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results10[0].Values[temp_index -1][1].ToString());
@@ -238,12 +203,7 @@ namespace WebGGSignal.Controllers
             var query11 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results11 = await _client.QueryAsync("MCCBSensors", query11);
 
-            if (results11.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results11[0].Values.Count() > 0)
+            if (results11.Count > 0 && results11[0].Values.Count() > 0)
             {
                 var temp_index = results11[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results11[0].Values[temp_index - 1][1].ToString());
@@ -255,12 +215,7 @@ namespace WebGGSignal.Controllers
             var query12 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results12 = await _client.QueryAsync("MCCBSensors", query12);
 
-            if (results12.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results12[0].Values.Count() > 0)
+            if (results12.Count > 0 && results12[0].Values.Count() > 0)
             {
                 var temp_index = results12[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results12[0].Values[temp_index - 1][1].ToString());
@@ -272,12 +227,7 @@ namespace WebGGSignal.Controllers
             var query13 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results13 = await _client.QueryAsync("MCCBSensors", query13);
 
-            if (results13.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results13[0].Values.Count() > 0)
+            if (results13.Count > 0 && results13[0].Values.Count() > 0)
             {
                 var temp_index = results13[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results13[0].Values[temp_index -1][1].ToString());
@@ -310,12 +260,7 @@ namespace WebGGSignal.Controllers
             var query1 = string.Format("select (\"MCCB1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results1 = await _client.QueryAsync("MCCBSensors", query1);
 
-            if (results1.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results1[0].Values.Count() > 0)
+            if (results1.Count > 0 && results1[0].Values.Count() > 0)
             {
                 var temp_index = results1[0].Values.Count();
                 reading.MCCB1 = float.Parse(results1[0].Values[temp_index -1][1].ToString());
@@ -327,12 +272,7 @@ namespace WebGGSignal.Controllers
             var query2 = string.Format("select (\"MCCB2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results2 = await _client.QueryAsync("MCCBSensors", query2);
 
-            if (results2.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results2[0].Values.Count() > 0)
+            if (results2.Count > 0 && results2[0].Values.Count() > 0)
             {
                 var temp_index = results2[0].Values.Count();
                 reading.MCCB2 = float.Parse(results2[0].Values[temp_index -1][1].ToString());
@@ -344,12 +284,7 @@ namespace WebGGSignal.Controllers
             var query3 = string.Format("select (\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results3 = await _client.QueryAsync("MCCBSensors", query3);
 
-            if (results3.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results3[0].Values.Count() > 0)
+            if (results3.Count > 0 && results3[0].Values.Count() > 0)
             {
                 var temp_index = results3[0].Values.Count();
                 reading.MCCB3 = float.Parse(results3[0].Values[temp_index - 1][1].ToString());
@@ -361,12 +296,7 @@ namespace WebGGSignal.Controllers
             var query4 = string.Format("select (\"MCCB4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results4 = await _client.QueryAsync("MCCBSensors", query4);
 
-            if (results4.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results4[0].Values.Count() > 0)
+            if (results4.Count > 0 && results4[0].Values.Count() > 0)
             {
                 var temp_index = results4[0].Values.Count();
                 reading.MCCB4 = float.Parse(results4[0].Values[temp_index - 1][1].ToString());
@@ -397,12 +327,7 @@ namespace WebGGSignal.Controllers
             var query10 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results10 = await _client.QueryAsync("MCCBSensors", query10);
 
-            if (results10.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results10[0].Values.Count() > 0)
+            if (results10.Count > 0 && results10[0].Values.Count() > 0)
             {
                 var temp_index = results10[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results10[0].Values[temp_index - 1][1].ToString());
@@ -414,12 +339,7 @@ namespace WebGGSignal.Controllers
             var query14 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results14 = await _client.QueryAsync("MCCBSensors", query14);
 
-            if (results14.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results14[0].Values.Count() > 0)
+            if (results14.Count > 0 && results14[0].Values.Count() > 0)
             {
                 var temp_index = results14[0].Values.Count();
                 reading.Va1 = float.Parse(results14[0].Values[temp_index - 1][1].ToString());
@@ -431,12 +351,7 @@ namespace WebGGSignal.Controllers
             var query15 = string.Format("select (\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results15 = await _client.QueryAsync("MCCBSensors", query15);
 
-            if (results15.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results15[0].Values.Count() > 0)
+            if (results15.Count > 0 && results15[0].Values.Count() > 0)
             {
                 var temp_index = results15[0].Values.Count();
                 reading.Vb1 = float.Parse(results15[0].Values[temp_index - 1][1].ToString());
@@ -448,12 +363,7 @@ namespace WebGGSignal.Controllers
             var query16 = string.Format("select (\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results16 = await _client.QueryAsync("MCCBSensors", query16);
 
-            if (results16.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results16[0].Values.Count() > 0)
+            if (results16.Count > 0 && results16[0].Values.Count() > 0)
             {
                 var temp_index = results16[0].Values.Count();
                 reading.Vc1 = float.Parse(results16[0].Values[temp_index - 1][1].ToString());
@@ -465,12 +375,7 @@ namespace WebGGSignal.Controllers
             var query17 = string.Format("select (\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results17 = await _client.QueryAsync("MCCBSensors", query17);
 
-            if (results17.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results17[0].Values.Count() > 0)
+            if (results17.Count > 0 && results17[0].Values.Count() > 0)
             {
                 var temp_index = results17[0].Values.Count();
                 reading.Ia1 = float.Parse(results17[0].Values[temp_index - 1][1].ToString());
@@ -482,12 +387,7 @@ namespace WebGGSignal.Controllers
             var query18 = string.Format("select (\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results18 = await _client.QueryAsync("MCCBSensors", query18);
 
-            if (results18.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results18[0].Values.Count() > 0)
+            if (results18.Count > 0 && results18[0].Values.Count() > 0)
             {
                 var temp_index = results18[0].Values.Count();
                 reading.Ib1 = float.Parse(results18[0].Values[temp_index - 1][1].ToString());
@@ -499,12 +399,7 @@ namespace WebGGSignal.Controllers
             var query19 = string.Format("select (\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results19 = await _client.QueryAsync("MCCBSensors", query19);
 
-            if (results19.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results19[0].Values.Count() > 0)
+            if (results19.Count > 0 && results19[0].Values.Count() > 0)
             {
                 var temp_index = results19[0].Values.Count();
                 reading.Ic1 = float.Parse(results19[0].Values[temp_index - 1][1].ToString());
@@ -516,12 +411,7 @@ namespace WebGGSignal.Controllers
             var query11 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results11 = await _client.QueryAsync("MCCBSensors", query11);
 
-            if (results11.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results11[0].Values.Count() > 0)
+            if (results11.Count > 0 && results11[0].Values.Count() > 0)
             {
                 var temp_index = results11[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results11[0].Values[temp_index - 1][1].ToString());
@@ -533,12 +423,7 @@ namespace WebGGSignal.Controllers
             var query20 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results20 = await _client.QueryAsync("MCCBSensors", query20);
 
-            if (results20.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results20[0].Values.Count() > 0)
+            if (results20.Count > 0 && results20[0].Values.Count() > 0)
             {
                 var temp_index = results20[0].Values.Count();
                 reading.Va2 = float.Parse(results20[0].Values[temp_index - 1][1].ToString());
@@ -550,12 +435,7 @@ namespace WebGGSignal.Controllers
             var query21 = string.Format("select (\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results21 = await _client.QueryAsync("MCCBSensors", query21);
 
-            if (results21.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results21[0].Values.Count() > 0)
+            if (results21.Count > 0 && results21[0].Values.Count() > 0)
             {
                 var temp_index = results21[0].Values.Count();
                 reading.Vb2 = float.Parse(results21[0].Values[temp_index - 1][1].ToString());
@@ -567,12 +447,7 @@ namespace WebGGSignal.Controllers
             var query22 = string.Format("select (\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results22 = await _client.QueryAsync("MCCBSensors", query22);
 
-            if (results22.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results22[0].Values.Count() > 0)
+            if (results22.Count > 0 && results22[0].Values.Count() > 0)
             {
                 var temp_index = results22[0].Values.Count();
                 reading.Vc2 = float.Parse(results22[0].Values[temp_index - 1][1].ToString());
@@ -584,12 +459,7 @@ namespace WebGGSignal.Controllers
             var query23 = string.Format("select (\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results23 = await _client.QueryAsync("MCCBSensors", query23);
 
-            if (results23.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results23[0].Values.Count() > 0)
+            if (results23.Count > 0 && results23[0].Values.Count() > 0)
             {
                 var temp_index = results23[0].Values.Count();
                 reading.Ia2 = float.Parse(results23[0].Values[temp_index - 1][1].ToString());
@@ -601,12 +471,7 @@ namespace WebGGSignal.Controllers
             var query24 = string.Format("select (\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results24 = await _client.QueryAsync("MCCBSensors", query24);
 
-            if (results24.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results24[0].Values.Count() > 0)
+            if (results24.Count > 0 && results24[0].Values.Count() > 0)
             {
                 var temp_index = results24[0].Values.Count();
                 reading.Ib2 = float.Parse(results24[0].Values[temp_index - 1][1].ToString());
@@ -618,12 +483,7 @@ namespace WebGGSignal.Controllers
             var query25 = string.Format("select (\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results25 = await _client.QueryAsync("MCCBSensors", query25);
 
-            if (results25.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results25[0].Values.Count() > 0)
+            if (results25.Count > 0 && results25[0].Values.Count() > 0)
             {
                 var temp_index = results25[0].Values.Count();
                 reading.Ic2 = float.Parse(results25[0].Values[temp_index - 1][1].ToString());
@@ -636,12 +496,7 @@ namespace WebGGSignal.Controllers
             var query12 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results12 = await _client.QueryAsync("MCCBSensors", query12);
 
-            if (results12.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results12[0].Values.Count() > 0)
+            if (results12.Count > 0 && results12[0].Values.Count() > 0)
             {
                 var temp_index = results12[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results12[0].Values[temp_index - 1][1].ToString());
@@ -653,12 +508,7 @@ namespace WebGGSignal.Controllers
             var query26 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results26 = await _client.QueryAsync("MCCBSensors", query26);
 
-            if (results26.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results26[0].Values.Count() > 0)
+            if (results26.Count > 0 && results26[0].Values.Count() > 0)
             {
                 var temp_index = results26[0].Values.Count();
                 reading.Va1 = float.Parse(results26[0].Values[temp_index - 1][1].ToString());
@@ -670,12 +520,7 @@ namespace WebGGSignal.Controllers
             var query27 = string.Format("select (\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results27 = await _client.QueryAsync("MCCBSensors", query27);
 
-            if (results27.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results27[0].Values.Count() > 0)
+            if (results27.Count > 0 && results27[0].Values.Count() > 0)
             {
                 var temp_index = results27[0].Values.Count();
                 reading.Vb1 = float.Parse(results27[0].Values[temp_index - 1][1].ToString());
@@ -687,12 +532,7 @@ namespace WebGGSignal.Controllers
             var query28 = string.Format("select (\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results28 = await _client.QueryAsync("MCCBSensors", query28);
 
-            if (results28.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results28[0].Values.Count() > 0)
+            if (results28.Count > 0 && results28[0].Values.Count() > 0)
             {
                 var temp_index = results28[0].Values.Count();
                 reading.Vc1 = float.Parse(results28[0].Values[temp_index - 1][1].ToString());
@@ -704,12 +544,7 @@ namespace WebGGSignal.Controllers
             var query29 = string.Format("select (\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results29 = await _client.QueryAsync("MCCBSensors", query29);
 
-            if (results29.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results29[0].Values.Count() > 0)
+            if (results29.Count > 0 && results29[0].Values.Count() > 0)
             {
                 var temp_index = results29[0].Values.Count();
                 reading.Ia1 = float.Parse(results29[0].Values[temp_index - 1][1].ToString());
@@ -721,12 +556,7 @@ namespace WebGGSignal.Controllers
             var query30 = string.Format("select (\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results30 = await _client.QueryAsync("MCCBSensors", query30);
 
-            if (results30.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results30[0].Values.Count() > 0)
+            if (results30.Count > 0 && results30[0].Values.Count() > 0)
             {
                 var temp_index = results30[0].Values.Count();
                 reading.Ib1 = float.Parse(results30[0].Values[temp_index - 1][1].ToString());
@@ -738,12 +568,7 @@ namespace WebGGSignal.Controllers
             var query31 = string.Format("select (\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results31 = await _client.QueryAsync("MCCBSensors", query31);
 
-            if (results31.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results31[0].Values.Count() > 0)
+            if (results31.Count > 0 && results31[0].Values.Count() > 0)
             {
                 var temp_index = results31[0].Values.Count();
                 reading.Ic1 = float.Parse(results31[0].Values[temp_index - 1][1].ToString());
@@ -756,12 +581,7 @@ namespace WebGGSignal.Controllers
             var query13 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results13 = await _client.QueryAsync("MCCBSensors", query13);
 
-            if (results13.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results13[0].Values.Count() > 0)
+            if (results13.Count > 0 && results13[0].Values.Count() > 0)
             {
                 var temp_index = results13[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results13[0].Values[temp_index - 1][1].ToString());
@@ -773,12 +593,7 @@ namespace WebGGSignal.Controllers
             var query32 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results32 = await _client.QueryAsync("MCCBSensors", query32);
 
-            if (results32.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results32[0].Values.Count() > 0)
+            if (results32.Count > 0 && results32[0].Values.Count() > 0)
             {
                 var temp_index = results32[0].Values.Count();
                 reading.Va1 = float.Parse(results32[0].Values[temp_index - 1][1].ToString());
@@ -790,12 +605,7 @@ namespace WebGGSignal.Controllers
             var query33 = string.Format("select (\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results33 = await _client.QueryAsync("MCCBSensors", query33);
 
-            if (results27.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results33[0].Values.Count() > 0)
+            if (results27.Count > 0 && results33[0].Values.Count() > 0)
             {
                 var temp_index = results33[0].Values.Count();
                 reading.Vb1 = float.Parse(results33[0].Values[temp_index - 1][1].ToString());
@@ -807,12 +617,7 @@ namespace WebGGSignal.Controllers
             var query34 = string.Format("select (\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results34 = await _client.QueryAsync("MCCBSensors", query34);
 
-            if (results34.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results34[0].Values.Count() > 0)
+            if (results34.Count > 0 && results34[0].Values.Count() > 0)
             {
                 var temp_index = results34[0].Values.Count();
                 reading.Vc1 = float.Parse(results34[0].Values[temp_index - 1][1].ToString());
@@ -824,12 +629,7 @@ namespace WebGGSignal.Controllers
             var query35 = string.Format("select (\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results35 = await _client.QueryAsync("MCCBSensors", query35);
 
-            if (results35.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results35[0].Values.Count() > 0)
+            if (results35.Count > 0 && results35[0].Values.Count() > 0)
             {
                 var temp_index = results35[0].Values.Count();
                 reading.Ia1 = float.Parse(results35[0].Values[temp_index - 1][1].ToString());
@@ -841,12 +641,7 @@ namespace WebGGSignal.Controllers
             var query36 = string.Format("select (\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results36 = await _client.QueryAsync("MCCBSensors", query36);
 
-            if (results36.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results36[0].Values.Count() > 0)
+            if (results36.Count > 0 && results36[0].Values.Count() > 0)
             {
                 var temp_index = results36[0].Values.Count();
                 reading.Ib1 = float.Parse(results36[0].Values[temp_index - 1][1].ToString());
@@ -858,12 +653,7 @@ namespace WebGGSignal.Controllers
             var query37 = string.Format("select (\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results37 = await _client.QueryAsync("MCCBSensors", query37);
 
-            if (results37.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results37[0].Values.Count() > 0)
+            if (results37.Count > 0 && results37[0].Values.Count() > 0)
             {
                 var temp_index = results37[0].Values.Count();
                 reading.Ic1 = float.Parse(results37[0].Values[temp_index - 1][1].ToString());
@@ -894,12 +684,7 @@ namespace WebGGSignal.Controllers
             var query5 = string.Format("select (\"T1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results5 = await _client.QueryAsync("MCCBSensors", query5);
 
-            if (results5.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results5[0].Values.Count() > 0)
+            if (results5.Count > 0 && results5[0].Values.Count() > 0)
             {
 
                 reading.T1 = float.Parse(results5[0].Values[0][1].ToString());
@@ -911,12 +696,7 @@ namespace WebGGSignal.Controllers
             var query6 = string.Format("select (\"T2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results6 = await _client.QueryAsync("MCCBSensors", query6);
 
-            if (results6.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results6[0].Values.Count() > 0)
+            if (results6.Count > 0 && results6[0].Values.Count() > 0)
             {
 
                 reading.T2 = float.Parse(results6[0].Values[0][1].ToString());
@@ -928,12 +708,7 @@ namespace WebGGSignal.Controllers
             var query7 = string.Format("select (\"T3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results7 = await _client.QueryAsync("MCCBSensors", query7);
 
-            if (results7.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results7[0].Values.Count() > 0)
+            if (results7.Count > 0 && results7[0].Values.Count() > 0)
             {
 
                 reading.T3 = float.Parse(results7[0].Values[0][1].ToString());
@@ -945,12 +720,7 @@ namespace WebGGSignal.Controllers
             var query8 = string.Format("select (\"T4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results8 = await _client.QueryAsync("MCCBSensors", query8);
 
-            if (results8.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results8[0].Values.Count() > 0)
+            if (results8.Count > 0 && results8[0].Values.Count() > 0)
             {
 
                 reading.T4 = float.Parse(results8[0].Values[0][1].ToString());
@@ -962,12 +732,7 @@ namespace WebGGSignal.Controllers
             var query9 = string.Format("select (\"T5\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results9 = await _client.QueryAsync("MCCBSensors", query9);
 
-            if (results9.Count == 0)
-            {
-                return BadRequest();
-            }
-
-            if (results9[0].Values.Count() > 0)
+            if (results9.Count > 0 && results9[0].Values.Count() > 0)
             {
 
                 reading.T5 = float.Parse(results9[0].Values[0][1].ToString());
