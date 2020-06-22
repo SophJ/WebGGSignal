@@ -43,18 +43,15 @@
         function display() {
             var x = document.getElementById("DynamicTable").rows[1].cells;
             var y = document.getElementById("DynamicTable").rows[2].cells;
-        //    var z = document.getElementById("DynamicTable").rows[3].cells;
-        //    var w = document.getElementById("DynamicTable").rows[4].cells;
+    
             if (lastChar == null) {
                 x[1].innerHTML = "No Data";
                 y[1].innerHTML = "No Data";
-            //    z[1].innerHTML = "No Data";
-            //    w[1].innerHTML = "No Data";
+       
             } else {
                 x[1].innerHTML = newString;
              //   y[1].innerHTML = newString;
-              //  z[1].innerHTML = newString;
-               // w[1].innerHTML = newString;
+ 
             }
 
         }
