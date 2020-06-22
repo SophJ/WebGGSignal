@@ -88,6 +88,13 @@
                 x[1].innerHTML = MCCB1_status + " (" + result + ")";
                 //x[1].innerHTML = result;
 
+                //show the last tripped date and time
+
+                if (MCCB1_status = 2) {
+                    var y = document.getElementById("DynamicTable").rows[2].cells;
+                    y[1].innerHTML = MCCB1_status + " (" + result + ")";
+                }
+
             } else if (result == "MCCB2") {
 
                 document.getElementById('DynamicTable').style.display = '';

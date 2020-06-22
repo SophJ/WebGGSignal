@@ -8,6 +8,7 @@
         <html>
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="Refresh" http-equiv="refresh" content="30" /> 
             <style>
                 /* width */
                 ::-webkit-scrollbar {
@@ -62,16 +63,20 @@
                 <label for="MCCB">Select Local Sensor:</label>
             </h6>
 
-            <select id="DeviceId" class="form-control sprites-arrow-down" onchange="GetSelectedValue()">
-                <option value=" " selected disabled hidden>Select an Option</option>
-                <option value="59001" >59001</option>
-                <option value="59002">59002</option>
-                <option value="59003">59003</option>
-                <option value="59004">59004</option>
-            </select>
-            <hr>
+            <h6> <button id="Button1" onClick="refreshPage()">Refresh</button> </h6>
 
-            <script>
+
+
+                <select id="DeviceId" class="form-control sprites-arrow-down" onchange="GetSelectedValue()">
+                    <option value=" " selected disabled hidden>Select an Option</option>
+                    <option value="59001">59001</option>
+                    <option value="59002">59002</option>
+                    <option value="59003">59003</option>
+                    <option value="59004">59004</option>
+                </select>
+                <hr>
+
+                <script>
                 window.onload = hideTable;
                 var MCCB1_59001_Status = "NIL";
                 var MCCB2_59001_Status = "NIL";
@@ -79,7 +84,7 @@
                 var MCCB4_59001_Status = "NIL";
 
                 function hideTable() {
-                    document.getElementById('table1').style.display = 'none';
+                    document.getElementById("table1").style.display = "none";
                 }
 
                 function GetSelectedValue() {
@@ -116,14 +121,14 @@
                         MCCB1_59001_Status = status1;
                         var a = document.getElementById("table1").rows[1].cells;
                         a[1].style.color = "White";
-                        a[1].bgColor = "green";
+                        a[1].bgColor = "red";
                     }
                     else if (MCCB1_status == 0) {
                         var status1 = "OFF";
                         MCCB1_59001_Status = status1;
                         var a = document.getElementById("table1").rows[1].cells;
                         a[1].style.color = "White";
-                        a[1].bgColor = "red";
+                        a[1].bgColor = "green";
                     } else if (MCCB1_status == "nil") {
                         var status1 = "Not Connected";
                         MCCB1_59001_Status = status1;
@@ -135,20 +140,20 @@
                         MCCB1_59001_Status = status1;
                         var a = document.getElementById("table1").rows[1].cells;
                         a[1].style.color = "Black";
-                        a[1].bgColor = "Yellow";
+                        a[1].bgColor = "Orange";
                     }
                     if (MCCB2_status == 1) {
                         var status2 = "ON";
                         MCCB2_59001_Status = status2;
                         var a = document.getElementById("table1").rows[2].cells;
                         a[1].style.color = "White";
-                        a[1].bgColor = "green";
+                        a[1].bgColor = "red";
                     }else if (MCCB2_status == 0) {
                         var status2 = "OFF";
                         MCCB2_59001_Status = status2;
                         var a = document.getElementById("table1").rows[2].cells;
                         a[1].style.color = "White";
-                        a[1].bgColor = "red";
+                        a[1].bgColor = "green";
                     } else if (MCCB2_status == "nil") {
                         var status2 = "Not Connected";
                         MCCB2_59001_Status = status2;
@@ -160,20 +165,20 @@
                         MCCB2_59001_Status = status2;
                         var a = document.getElementById("table1").rows[2].cells;
                         a[1].style.color = "Black";
-                        a[1].bgColor = "Yellow";
+                        a[1].bgColor = "Orange";
                     }
                     if (MCCB3_status == 1) {
                         var status3 = "ON";
-                        var MCCB3_59001_Status = status3; 
+                        var MCCB3_59001_Status = status3;
                         var a = document.getElementById("table1").rows[3].cells;
                         a[1].style.color = "White";
-                        a[1].bgColor = "green";
+                        a[1].bgColor = "red";
                     }else if (MCCB3_status == 0) {
                         var status3 = "OFF";
                         var MCCB3_59001_Status = status3;
                         var a = document.getElementById("table1").rows[3].cells;
                         a[1].style.color = "White";
-                        a[1].bgColor = "red";
+                        a[1].bgColor = "green";
                     } else if (MCCB3_status == "nil") {
                         var status3 = "Not Connected";
                         var MCCB3_59001_Status = status3;
@@ -185,21 +190,21 @@
                         var MCCB3_59001_Status = status3;
                         var a = document.getElementById("table1").rows[3].cells;
                         a[1].style.color = "Black";
-                        a[1].bgColor = "Yellow";
+                        a[1].bgColor = "Orange";
                     }
                     if (MCCB4_status == 1) {
                         var status4 = "ON";
                         var MCCB4_59001_Status = status4;
                         var a = document.getElementById("table1").rows[4].cells;
                         a[1].style.color = "White";
-                        a[1].bgColor = "green";
+                        a[1].bgColor = "red";
                     }
                     else if (MCCB4_status == 0) {
                         var status4 = "OFF";
                         var MCCB4_59001_Status = status4;
                         var a = document.getElementById("table1").rows[4].cells;
                         a[1].style.color = "White";
-                        a[1].bgColor = "red";
+                        a[1].bgColor = "green";
                     } else if (MCCB4_status == "nil") {
                         var status4 = "Not Connected";
                         var MCCB4_59001_Status = status4;
@@ -211,7 +216,7 @@
                         var MCCB4_59001_Status = status4;
                         var a = document.getElementById("table1").rows[4].cells;
                         a[1].style.color = "Black";
-                        a[1].bgColor = "Yellow";
+                        a[1].bgColor = "Orange";
                     }
 
                     if (result == 59001) {
@@ -314,86 +319,110 @@
                         }
                     }
 
-        
-            </script>
+                function refreshPage() {
+                    // refreshes the table
+                   
+                    var table = document.getElementById("table1");
+                    alert("0000000");
+                    table.refreshPage;
+                    alert("1111111");
+                    window.location.reload();
+                    alert("--11111");
+                    //document.getElementById('table1').style.display = ;
+                    alert("2222222");
+                    
+                        }
 
-            <table id="table1" class="table" http-equiv="refresh" content="30">
 
-                <tr>
-                    <th>Sensor Name</th>
-                    <th>Current Status</th>
-                    <th>Details</th>
-                </tr>
-                <tr>
-                    <td> MCCB1 (Location)</td>
-                    <td> H </td>
-                    <td><form action="Home/MCCB"><input type="hidden" name="1" value="9999" id="a" />
-                        <button id="Button1" onclick="passValue()" class="float-right submit-button">More Details ></button></form> </td>
-                </tr>
-                <tr>
-                    <td> MCCB2 (Location)</td>
-                    <td> G </td>
-                    <td><form action="Home/MCCB"><input type="hidden" name="2" value="9999" id="b" />
-                        <button id="Button2" onclick="passValue()" class="float-right submit-button">></button></form> </td>
-                </tr>
-                <tr>
-                    <td> MCCB3 (Location) </td>
-                    <td> <script> MCCB3_status </script> KKKKK </td>
-                    <td><button id="Button3" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td> MCCB4 (Location) </td>
-                    <td> <script> MCCB4_status </script>AAAAAA </td>
-                    <td><button id="Button3" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td>Power Meter1 (Location) </td>
-                    <td>Power1_status kWh</td>
-                    <td><button id="Button4" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td> Power Meter2 (Location) </td>
-                    <td>Power2_status kWh</td>
-                    <td><button id="Button5" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td> Power Meter3 (Location) </td>
-                    <td>Power3_status kWh</td>
-                    <td><button id="Button6" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td> Power Meter4 (Location) </td>
-                    <td>Power4_status kWh</td>
-                    <td><button id="Button7" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td> Temperature1 </td>
-                    <td>Temperature1_status Degree</td>
-                    <td><button id="Button12" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td> Temperature2 </td>
-                    <td>Temperature2_status Degree</td>
-                    <td><button id="Button13" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td> Temperature3 </td>
-                    <td>Temperature3_status Degree</td>
-                    <td><button id="Button14" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td>  Temperature4 </td>
-                    <td>Temperature4_status Degree</td>
-                    <td><button id="Button15" class="float-right submit-button">></button></td>
-                </tr>
-                <tr>
-                    <td>  Temperature5 </td>
-                    <td>Temperature5_status Degree</td>
-                    <td><button id="Button16" class="float-right submit-button">></button></td>
-                </tr>
-            </table>
+                </script>
 
-                
+                <table id="table1" class="table">
+
+                    <tr>
+                        <th>Sensor Name</th>
+                        <th>Current Status</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td> MCCB1 (Location)</td>
+                        <td> H </td>
+                        <td>
+                            <form action="Home/MCCB">
+                                <input type="hidden" name="1" value="9999" id="a" />
+                                <button id="Button1" onclick="passValue()" class="float-right submit-button">More Details ></button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> MCCB2 (Location)</td>
+                        <td> G </td>
+                        <td>
+                            <form action="Home/MCCB">
+                                <input type="hidden" name="2" value="9999" id="b" />
+                                <button id="Button2" onclick="passValue()" class="float-right submit-button">></button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> MCCB3 (Location) </td>
+                        <td>
+                        <script>MCCB3_status</script> KKKKK </td>
+                        <td><button id="Button3" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td> MCCB4 (Location) </td>
+                        <td>
+                        <script>MCCB4_status</script>AAAAAA </td>
+                        <td><button id="Button3" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td>Power Meter1 (Location) </td>
+                        <td>Power1_status kWh</td>
+                        <td><button id="Button4" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td> Power Meter2 (Location) </td>
+                        <td>Power2_status kWh</td>
+                        <td><button id="Button5" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td> Power Meter3 (Location) </td>
+                        <td>Power3_status kWh</td>
+                        <td><button id="Button6" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td> Power Meter4 (Location) </td>
+                        <td>Power4_status kWh</td>
+                        <td><button id="Button7" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td> Temperature1 </td>
+                        <td>Temperature1_status Degree</td>
+                        <td><button id="Button12" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td> Temperature2 </td>
+                        <td>Temperature2_status Degree</td>
+                        <td><button id="Button13" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td> Temperature3 </td>
+                        <td>Temperature3_status Degree</td>
+                        <td><button id="Button14" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td>  Temperature4 </td>
+                        <td>Temperature4_status Degree</td>
+                        <td><button id="Button15" class="float-right submit-button">></button></td>
+                    </tr>
+                    <tr>
+                        <td>  Temperature5 </td>
+                        <td>Temperature5_status Degree</td>
+                        <td><button id="Button16" class="float-right submit-button">></button></td>
+                    </tr>
+                </table>
+
+
 
                 <script type="text/javascript">
                     document.getElementById("Button2").onclick = function () {
