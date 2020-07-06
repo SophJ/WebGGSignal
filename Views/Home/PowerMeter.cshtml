@@ -50,6 +50,10 @@
 
                         function GetSelectedValue() {
 
+                            d = new Date();
+                            var g = document.getElementById("DynamicTable").rows[8].cells;
+                            g[1].innerHTML = d;
+
                 var a = document.getElementById("StaticTable").rows[1].cells;
                 var b = document.getElementById("StaticTable").rows[2].cells;
                 var str1 = "6546g456456b --- ";
@@ -177,7 +181,7 @@
 
         <tr>
             <td>Total Power (kWh) :</td>
-            <td> kWh</td>
+            <td><script>@Model.TotalKWhCH1 +"kWh"</script></td>
         </tr>
         <tr>
             <td>Line Voltage A:</td>
@@ -206,7 +210,7 @@
 
         <tr>
             <td>Date & Time :</td>
-            <td> @Model.Va1T </td>
+            <td><script>d + "-5s"</script></td>
         </tr>
 
     </table>
