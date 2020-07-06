@@ -18,6 +18,7 @@ namespace WebGGSignal.Controllers
         private InfluxDb _client;
 
         ReadingResultModel reading = new ReadingResultModel();
+        
 
         //private static Timer aTimer;
 
@@ -28,6 +29,8 @@ namespace WebGGSignal.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
+            List<ReadingResultModel> list1 = new List<ReadingResultModel>();
+            list1.Append(reading);
 
             // [Current Time - 5 min] to [Current Time]
             string startDate = "2020-06-16";
@@ -235,8 +238,9 @@ namespace WebGGSignal.Controllers
 
             }
 
+            //ViewData["ReceivedBids"] = _context.Bid.Where(s => s.BidderId == user.Id).ToList();
+            //return view();
             return View(reading);
-
 
         }
 
@@ -304,6 +308,58 @@ namespace WebGGSignal.Controllers
 
             }
 
+            //Last Trip MCCB1LT
+            var query100 = string.Format("select last(\"MCCB1\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4' AND Value = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            List<Serie> results100 = await _client.QueryAsync("MCCBSensors", query100);
+
+            if (results100.Count > 0 && results100[0].Values.Count() > 0)
+            {
+                //DateTime unixStart = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+               
+                var temp_index = results100[0].Values.Count();
+                reading.unixStart = DateTime.Parse(results100[0].Values[temp_index - 1][0].ToString());
+                reading.Status = 1;
+
+            }
+
+            //Last Trip MCCB2LT
+            var query101 = string.Format("select last(\"MCCB2\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4' AND Value = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            List<Serie> results101 = await _client.QueryAsync("MCCBSensors", query101);
+
+            if (results101.Count > 0 && results101[0].Values.Count() > 0)
+            {
+                var temp_index = results101[0].Values.Count();
+                reading.unixStart = DateTime.Parse(results101[0].Values[temp_index - 1][0].ToString());
+                reading.Status = 1;
+
+            }
+
+            //Last Trip MCCB3LT
+            var query102 = string.Format("select last(\"MCCB3\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4' AND Value = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            List<Serie> results102 = await _client.QueryAsync("MCCBSensors", query102);
+
+            if (results102.Count > 0 && results101[0].Values.Count() > 0)
+            {
+                var temp_index = results102[0].Values.Count();
+                reading.unixStart = DateTime.Parse(results102[0].Values[temp_index - 1][0].ToString());
+                reading.Status = 1;
+
+            }
+
+            //Last Trip MCCB4LT
+            var query103 = string.Format("select last(\"MCCB4\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4' AND Value = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            List<Serie> results103 = await _client.QueryAsync("MCCBSensors", query103);
+
+            if (results103.Count > 0 && results103[0].Values.Count() > 0)
+            {
+                var temp_index = results103[0].Values.Count();
+                reading.unixStart = DateTime.Parse(results103[0].Values[temp_index - 1][0].ToString());
+                reading.Status = 1;
+
+            }
+
+            //            List<Bid> bidList = _context.Bid.Where(b => b.Id != id && b.CompanyId == companyId).ToList<Bid>();
+
             return View(reading);
         }
 
@@ -343,6 +399,7 @@ namespace WebGGSignal.Controllers
             {
                 var temp_index = results14[0].Values.Count();
                 reading.Va1 = float.Parse(results14[0].Values[temp_index - 1][1].ToString());
+                reading.Va1T = DateTime.Parse(results14[0].Values[temp_index - 1][0].ToString());
                 reading.Status = 1;
 
             }

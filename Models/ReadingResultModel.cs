@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,11 +9,14 @@ namespace WebGGSignal.Models
    
     public class ReadingResultModel
     {
-
+        [Required]
         public float MCCB1 { get; set; } = 0;
         public float MCCB2 { get; set; } = 0;
         public float MCCB3 { get; set; } = 0;
         public float MCCB4 { get; set; } = 0;
+
+        //public DateTime unixStart = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+        public DateTime unixStart { get; set; }
 
         public float T1 { get; set; } = 0;
         public float T2 { get; set; } = 0;
@@ -33,6 +37,8 @@ namespace WebGGSignal.Models
         public float Ic1 { get; set; } = 0;
 
         public float Va1 { get; set; } = 0;
+
+        public DateTime Va1T { get; set; }
         public float Vb1 { get; set; } = 0;
         public float Vc1 { get; set; } = 0;
 

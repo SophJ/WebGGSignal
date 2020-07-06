@@ -31,7 +31,7 @@
     <script>
 
         @model WebGGSignal.Models.ReadingResultModel
-
+        alert("111");
         var url = window.location.href;
         var myString = url;
         var lastChar = myString[myString.length-1];
@@ -43,15 +43,15 @@
         function display() {
             var x = document.getElementById("DynamicTable").rows[1].cells;
             var y = document.getElementById("DynamicTable").rows[2].cells;
-    
+
             if (lastChar == null) {
                 x[1].innerHTML = "No Data";
                 y[1].innerHTML = "No Data";
-       
+
             } else {
                 x[1].innerHTML = newString;
-             //   y[1].innerHTML = newString;
- 
+                //   y[1].innerHTML = newString;
+
             }
 
         }
@@ -60,23 +60,27 @@
                 var MCCB2_status = @Model.MCCB2
                 var MCCB3_status = @Model.MCCB3
                 var MCCB4_status = @Model.MCCB4
-                    getElementById("log").innerHTML = login;
-                    function GetSelectedValue() {
+                @* LastTrip = @Model.unixStart*@
 
-                        d = new Date();
-                        var y = document.getElementById("DynamicTable").rows[2].cells;
-                        y[1].innerHTML = d;
+                    alert(LastTrip.toString());
 
-                        var a = document.getElementById("StaticTable").rows[1].cells;
-                        var b = document.getElementById("StaticTable").rows[2].cells;
-                        var str1 = "From MSSQL --- ";
-                        var str2 = "From MSSQL --- ";
+        getElementById("log").innerHTML = login;
+        function GetSelectedValue() {
 
-                        a[1].innerHTML = str1.concat(result);
-                        b[1].innerHTML = str2.concat(result);
+            d = new Date();
+            var y = document.getElementById("DynamicTable").rows[2].cells;
+            y[1].innerHTML = d;
 
-                        var e = document.getElementById("MCCBs");
-                        var result = e.options[e.selectedIndex].value;
+            var a = document.getElementById("StaticTable").rows[1].cells;
+            var b = document.getElementById("StaticTable").rows[2].cells;
+            var str1 = "From MSSQL --- ";
+            var str2 = "From MSSQL --- ";
+
+            a[1].innerHTML = str1.concat(result);
+            b[1].innerHTML = str2.concat(result);
+
+            var e = document.getElementById("MCCBs");
+            var result = e.options[e.selectedIndex].value;
                        // alert(result);
             if (result == "MCCB1") {
                 //alert("11111");
@@ -84,13 +88,8 @@
                 var x = document.getElementById("DynamicTable").rows[1].cells;
                 x[1].innerHTML = MCCB1_status + " (" + result + ")";
                 //x[1].innerHTML = result;
-
-                //show the last tripped date and time
-
-                if (MCCB1_status = 2) {
                     var y = document.getElementById("DynamicTable").rows[2].cells;
-                    y[1].innerHTML = MCCB1_status + " (" + result + ")";
-                }
+                    y[1].innerHTML = LastTrip + " (" + result + ")";
 
             } else if (result == "MCCB2") {
 
