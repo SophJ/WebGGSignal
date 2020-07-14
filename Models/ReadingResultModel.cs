@@ -39,6 +39,9 @@ namespace WebGGSignal.Models
         public float Va1 { get; set; } = 0;
 
         public DateTime Va1T { get; set; }
+
+        public String Va1TString { get; set; }
+
         public float Vb1 { get; set; } = 0;
         public float Vc1 { get; set; } = 0;
 
