@@ -8,9 +8,9 @@
 <body>
 
     <style>
+
         body {
             background-color: ghostwhite;
-            ;
         }
     </style>
 
@@ -48,16 +48,18 @@
                     var IB2_status = @Model.Ib2
                     var IC2_status = @Model.Ic2
 
+                    var Va1T_status = "@Model.Va1TString"
+
                         function GetSelectedValue() {
 
-                            d = new Date();
-                            var g = document.getElementById("DynamicTable").rows[8].cells;
-                            g[1].innerHTML = d;
+                           // d = new Date();
+                           // var g = document.getElementById("DynamicTable").rows[8].cells;
+                           // g[1].innerHTML = d;
 
-                var a = document.getElementById("StaticTable").rows[1].cells;
-                var b = document.getElementById("StaticTable").rows[2].cells;
-                var str1 = "6546g456456b --- ";
-                var str2 = "L1-DB 2 --- ";
+                        var a = document.getElementById("StaticTable").rows[1].cells;
+                        var b = document.getElementById("StaticTable").rows[2].cells;
+                        var str1 = "6546g456456b --- ";
+                        var str2 = "L1-DB 2 --- ";
 
                         a[1].innerHTML = str1.concat(result);
                         b[1].innerHTML = str2.concat(result);
@@ -90,8 +92,12 @@
                             var f = document.getElementById("DynamicTable").rows[7].cells;
                             f[1].innerHTML = IC1_status + " (" + result + ")";
 
+                            var g = document.getElementById("DynamicTable").rows[8].cells;
+                            g[1].innerHTML = Va1T_status + " (" + result + ")";
 
-                            } else if (result == "PowerMeter2") {
+
+                            }
+                            else if (result == "PowerMeter2") {
 
                             document.getElementById('DynamicTable').style.display = '';
                             var x = document.getElementById("DynamicTable").rows[1].cells;
@@ -113,9 +119,41 @@
                             e[1].innerHTML = IB2_status + " (" + result + ")";
 
                             var f = document.getElementById("DynamicTable").rows[7].cells;
-                            f[1].innerHTML = IC2_status + " (" + result + ")";
+                                f[1].innerHTML = IC2_status + " (" + result + ")";
 
-                            } else if (result == "PowerMeter3") {
+                                var g = document.getElementById("DynamicTable").rows[8].cells;
+                                g[1].innerHTML = Va1T_status + " (" + result + ")";
+
+                            }
+                            else if (result == "PowerMeter3") {
+
+                            document.getElementById('DynamicTable').style.display = '';
+                            var x = document.getElementById("DynamicTable").rows[1].cells;
+                                x[1].innerHTML = Power1_status + " (" + result + ")";
+
+                            var y = document.getElementById("DynamicTable").rows[2].cells;
+                            y[1].innerHTML = VA1_status + " (" + result + ")";
+
+                            var z = document.getElementById("DynamicTable").rows[3].cells;
+                            z[1].innerHTML = VB1_status + " (" + result + ")";
+
+                            var c = document.getElementById("DynamicTable").rows[4].cells;
+                            c[1].innerHTML = VC1_status + " (" + result + ")";
+
+                            var d = document.getElementById("DynamicTable").rows[5].cells;
+                                d[1].innerHTML = IA1_status + " (" + result + ")";
+
+                            var e = document.getElementById("DynamicTable").rows[6].cells;
+                            e[1].innerHTML = IB1_status + " (" + result + ")";
+
+                            var f = document.getElementById("DynamicTable").rows[7].cells;
+                                f[1].innerHTML = IC1_status + " (" + result + ")";
+
+                                var g = document.getElementById("DynamicTable").rows[8].cells;
+                                g[1].innerHTML = Va1T_status + " (" + result + ")";
+
+                            }
+                            else if (result == "PowerMeter4") {
 
                             document.getElementById('DynamicTable').style.display = '';
                             var x = document.getElementById("DynamicTable").rows[1].cells;
@@ -139,30 +177,8 @@
                             var f = document.getElementById("DynamicTable").rows[7].cells;
                             f[1].innerHTML = IC1_status + " (" + result + ")";
 
-                            } else if (result == "PowerMeter4") {
-
-                            document.getElementById('DynamicTable').style.display = '';
-                            var x = document.getElementById("DynamicTable").rows[1].cells;
-                                x[1].innerHTML = Power1_status + " (" + result + ")";
-
-                            var y = document.getElementById("DynamicTable").rows[2].cells;
-                            y[1].innerHTML = VA1_status + " (" + result + ")";
-
-                            var z = document.getElementById("DynamicTable").rows[3].cells;
-                            z[1].innerHTML = VB1_status + " (" + result + ")";
-
-                            var c = document.getElementById("DynamicTable").rows[4].cells;
-                            c[1].innerHTML = VC1_status + " (" + result + ")";
-
-                            var d = document.getElementById("DynamicTable").rows[5].cells;
-                                d[1].innerHTML = IA1_status + " (" + result + ")";
-
-                            var e = document.getElementById("DynamicTable").rows[6].cells;
-                            e[1].innerHTML = IB1_status + " (" + result + ")";
-
-                            var f = document.getElementById("DynamicTable").rows[7].cells;
-                            f[1].innerHTML = IC1_status + " (" + result + ")";
-
+                                var g = document.getElementById("DynamicTable").rows[8].cells;
+                                g[1].innerHTML = Va1T_status + " (" + result + ")";
                         }
 
             }
@@ -181,7 +197,7 @@
 
         <tr>
             <td>Total Power (kWh) :</td>
-            <td><script>@Model.TotalKWhCH1 +"kWh"</script></td>
+            <td>c</td>
         </tr>
         <tr>
             <td>Line Voltage A:</td>
@@ -210,7 +226,9 @@
 
         <tr>
             <td>Date & Time :</td>
-            <td><script>d + "-5s"</script></td>
+            <td>
+            <script>@Model.Va1TString</script></td>
+
         </tr>
 
     </table>
