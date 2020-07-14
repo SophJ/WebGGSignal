@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using WebGGSignal.Models;
 using System.Timers;
 using System;
+using System.Globalization;
 
 namespace WebGGSignal.Controllers
 {
@@ -18,17 +19,34 @@ namespace WebGGSignal.Controllers
         private InfluxDb _client;
 
         ReadingResultModel reading = new ReadingResultModel();
-        
 
-        //private static Timer aTimer;
+    //private static Timer aTimer;
 
-        public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
         public async Task<IActionResult> IndexAsync()
         {
+
+            // Query Device ID
+            // SHOW TAG VALUES ON "MCCBSensors" FROM "Reading" WITH KEY = "DeviceId"
+            var query0 = "SHOW TAG VALUES ON \"MCCBSensors\" FROM \"Reading\" WITH KEY = \"DeviceId\"";
+
+            _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
+            List<Serie> results0 = await _client.QueryAsync("MCCBSensors", query0);
+
+            var iDeviceNum = results0.Count;
+            //iDeviceNum = results0.Num
+            // Create Device List
+            //while(iDeviceNum > 0)
+            //{ Device List [0] = result0[0], [1] = [1]
+            //   iDeviceNum--;
+            //}
+
+            Console.WriteLine(results0[0].Values[iDeviceNum-1][1]);
+
             List<ReadingResultModel> list1 = new List<ReadingResultModel>();
             list1.Append(reading);
 
@@ -55,6 +73,10 @@ namespace WebGGSignal.Controllers
             Console.WriteLine("======================");
 
             _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
+
+
+
+            // var query1 = string.Format("select (\"MCCB1\") from basic.Reading WHERE DeviceId = iCurrentDeviceId.Tostring + "AND time >= '" + startDate + "' AND time <='" + endDate + "'");
 
             //MCCB1
             var query1 = string.Format("select (\"MCCB1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time <='" + endDate + "'"); //Get latest timestamp for specific device
@@ -369,7 +391,7 @@ namespace WebGGSignal.Controllers
             string endDate = "2020-05-19";
 
             DateTime utcDate = DateTime.UtcNow;
-            Console.WriteLine("======================");
+            Console.WriteLine("===========Power Meter===========");
             Console.WriteLine(utcDate.ToString());
 
             //startDate = [Current Time - 5 min]
@@ -390,6 +412,10 @@ namespace WebGGSignal.Controllers
                 reading.Status = 1;
 
             }
+            else
+            {
+               Console.WriteLine("No data");
+            }
 
             //VA1
             var query14 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
@@ -400,8 +426,37 @@ namespace WebGGSignal.Controllers
                 var temp_index = results14[0].Values.Count();
                 reading.Va1 = float.Parse(results14[0].Values[temp_index - 1][1].ToString());
                 reading.Va1T = DateTime.Parse(results14[0].Values[temp_index - 1][0].ToString());
-                reading.Status = 1;
+                Console.WriteLine("testets");
+                Console.WriteLine(reading.Va1T);
 
+                CultureInfo enUK = new CultureInfo("en-UK");
+                //CultureInfo enSG = new CultureInfo("en-SG");
+                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+                
+                string lstdateString, format;
+
+                DateTime result;
+                DateTime sgtTime;
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                lstdateString = reading.Va1T.ToString();
+                format = "MM/dd/yyyy HH:mm:ss tt";
+                try
+                {
+                    result = DateTime.ParseExact(lstdateString, "M/dd/yyyy h:mm:ss tt", enUK, DateTimeStyles.None);
+                    sgtTime = TimeZoneInfo.ConvertTimeFromUtc(result, sgtZone);
+                    Console.WriteLine("{0} converts to {1}.", lstdateString, result.ToString());
+                    Console.WriteLine("SGTime: {0}.", sgtTime.ToString());
+                    reading.Va1TString = sgtTime.ToString();
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("{0} is not in the correct format.", lstdateString);
+                }
+                reading.Status = 1;
+            }
+            else
+            {
+                Console.WriteLine("No data");
             }
 
             //VB1
