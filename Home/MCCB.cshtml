@@ -1,0 +1,172 @@
+﻿@{
+    ViewData["Title"] = "MCCB";
+}
+<h3 class="display-4">@ViewData["Title"]</h3>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+    <style>
+        body {
+            background-color: ghostwhite;
+            ;
+        }
+    </style>
+
+    <h4>Detail data - MCCB</h4>
+
+    <label for="MCCB">Select MCCB:</label>
+
+    <select id="MCCBs" class="form-control sprites-arrow-down" onchange="GetSelectedValue()">
+        <option value="none" selected disabled hidden>
+            Select an Option
+        </option>
+        <option value="MCCB1">MCCB1</option>
+        <option value="MCCB2">MCCB2</option>
+        <option value="MCCB3">MCCB3</option>
+        <option value="MCCB4">MCCB4</option>
+    </select>
+
+    <script>
+
+        @model WebGGSignal.Models.ReadingResultModel
+        alert("111");
+        var url = window.location.href;
+        var myString = url;
+        var lastChar = myString[myString.length-1];
+        window.onload = display;
+        var n = myString.indexOf("=");
+
+        var newString = myString.substring(n+1, myString.length+1);
+
+        function display() {
+            var x = document.getElementById("DynamicTable").rows[1].cells;
+            var y = document.getElementById("DynamicTable").rows[2].cells;
+
+            if (lastChar == null) {
+                x[1].innerHTML = "No Data";
+                y[1].innerHTML = "No Data";
+
+            } else {
+                x[1].innerHTML = newString;
+                //   y[1].innerHTML = newString;
+
+            }
+
+        }
+
+                var MCCB1_status = @Model.MCCB1
+                var MCCB2_status = @Model.MCCB2
+                var MCCB3_status = @Model.MCCB3
+                var MCCB4_status = @Model.MCCB4
+
+                var Va1T_status = "@Model.Va1TString"
+                @* LastTrip = @Model.unixStart*@
+
+                    alert(LastTrip.toString());
+
+        getElementById("log").innerHTML = login;
+        function GetSelectedValue() {
+
+            d = new Date();
+            var y = document.getElementById("DynamicTable").rows[2].cells;
+            y[1].innerHTML = d;
+
+            var a = document.getElementById("StaticTable").rows[1].cells;
+            var b = document.getElementById("StaticTable").rows[2].cells;
+            var str1 = "From MSSQL --- ";
+            var str2 = "From MSSQL --- ";
+
+            a[1].innerHTML = str1.concat(result);
+            b[1].innerHTML = str2.concat(result);
+
+            var e = document.getElementById("MCCBs");
+            var result = e.options[e.selectedIndex].value;
+                       // alert(result);
+            var g = document.getElementById("DynamicTable").rows[3].cells;
+            g[1].innerHTML = Va1T_status + " (" + result + ")";
+
+            if (result == "MCCB1") {
+                //alert("11111");
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = MCCB1_status + " (" + result + ")";
+                //x[1].innerHTML = result;
+                    var y = document.getElementById("DynamicTable").rows[2].cells;
+                    y[1].innerHTML = LastTrip + " (" + result + ")";
+
+            } else if (result == "MCCB2") {
+
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = MCCB2_status + " (" + result + ")";
+
+            } else if (result == "MCCB3") {
+
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = MCCB3_status + " (" + result + ")";
+
+            } else if (result == "MCCB4") {
+
+                document.getElementById('DynamicTable').style.display = '';
+                var x = document.getElementById("DynamicTable").rows[1].cells;
+                x[1].innerHTML = MCCB4_status + " (" + result + ")";
+
+            }
+
+        }
+
+    </script>
+
+    <br />
+    <br />
+
+    <table id="DynamicTable">
+
+        <tr>
+            <th>Dynamic Data</th>
+            <td>  </td>
+        </tr>
+
+        <tr>
+            <td>Last Status :</td>
+            <td>  </td>
+        </tr>
+        <tr>
+            <td>Last Tripped :</td>
+            <td>Date & Time</td>
+        </tr>
+        <tr>
+            <td>Date & Time :</td>
+            <td>
+                <script>@Model.Va1TString</script>
+            </td>
+
+        </tr>
+    </table>
+
+    <table id="StaticTable">
+
+        <tr>
+            <th>Static Data</th>
+            <td>  </td>
+        </tr>
+
+        <tr>
+            <td>Device serial no.:</td>
+            <td>6546g456456b</td>
+        </tr>
+        <tr>
+            <td>Location :</td>
+            <td>L1-DB 2</td>
+        </tr>
+
+    </table>
+
+    <div id="log"></div>
+    <div id="pass"></div>
+
+</body>
+</html>
