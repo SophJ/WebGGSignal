@@ -290,8 +290,38 @@ namespace WebGGSignal.Controllers
             {
                 var temp_index = results1[0].Values.Count();
                 reading.MCCB1 = float.Parse(results1[0].Values[temp_index -1][1].ToString());
-                reading.Status = 1;
+                reading.Va1T = DateTime.Parse(results1[0].Values[temp_index - 1][0].ToString());
+                Console.WriteLine("testets");
+                Console.WriteLine(reading.Va1T);
 
+                CultureInfo enUK = new CultureInfo("en-UK");
+                //CultureInfo enSG = new CultureInfo("en-SG");
+                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+                string lstdateString, format;
+
+                DateTime result;
+                DateTime sgtTime;
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                lstdateString = reading.Va1T.ToString();
+                format = "MM/dd/yyyy HH:mm:ss tt";
+                try
+                {
+                    result = DateTime.ParseExact(lstdateString, "M/dd/yyyy h:mm:ss tt", enUK, DateTimeStyles.None);
+                    sgtTime = TimeZoneInfo.ConvertTimeFromUtc(result, sgtZone);
+                    Console.WriteLine("{0} converts to {1}.", lstdateString, result.ToString());
+                    Console.WriteLine("SGTime: {0}.", sgtTime.ToString());
+                    reading.Va1TString = sgtTime.ToString();
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("{0} is not in the correct format.", lstdateString);
+                }
+                reading.Status = 1;
+            }
+            else
+            {
+                Console.WriteLine("No data");
             }
 
             //MCCB2
@@ -798,10 +828,40 @@ namespace WebGGSignal.Controllers
 
             if (results5.Count > 0 && results5[0].Values.Count() > 0)
             {
+                var temp_index = results5[0].Values.Count();
+                reading.T1 = float.Parse(results5[0].Values[temp_index - 1][1].ToString());
+                reading.Va1T = DateTime.Parse(results5[0].Values[temp_index - 1][0].ToString());
+                Console.WriteLine("testets");
+                Console.WriteLine(reading.Va1T);
 
-                reading.T1 = float.Parse(results5[0].Values[0][1].ToString());
+                CultureInfo enUK = new CultureInfo("en-UK");
+                //CultureInfo enSG = new CultureInfo("en-SG");
+                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+                string lstdateString, format;
+
+                DateTime result;
+                DateTime sgtTime;
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                lstdateString = reading.Va1T.ToString();
+                format = "MM/dd/yyyy HH:mm:ss tt";
+                try
+                {
+                    result = DateTime.ParseExact(lstdateString, "M/dd/yyyy h:mm:ss tt", enUK, DateTimeStyles.None);
+                    sgtTime = TimeZoneInfo.ConvertTimeFromUtc(result, sgtZone);
+                    Console.WriteLine("{0} converts to {1}.", lstdateString, result.ToString());
+                    Console.WriteLine("SGTime: {0}.", sgtTime.ToString());
+                    reading.Va1TString = sgtTime.ToString();
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("{0} is not in the correct format.", lstdateString);
+                }
                 reading.Status = 1;
-
+            }
+            else
+            {
+                Console.WriteLine("No data");
             }
 
             //T2
@@ -810,8 +870,8 @@ namespace WebGGSignal.Controllers
 
             if (results6.Count > 0 && results6[0].Values.Count() > 0)
             {
-
-                reading.T2 = float.Parse(results6[0].Values[0][1].ToString());
+                var temp_index = results6[0].Values.Count();
+                reading.T2 = float.Parse(results6[0].Values[temp_index -1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -822,8 +882,8 @@ namespace WebGGSignal.Controllers
 
             if (results7.Count > 0 && results7[0].Values.Count() > 0)
             {
-
-                reading.T3 = float.Parse(results7[0].Values[0][1].ToString());
+                var temp_index = results7[0].Values.Count();
+                reading.T3 = float.Parse(results7[0].Values[temp_index -1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -834,8 +894,8 @@ namespace WebGGSignal.Controllers
 
             if (results8.Count > 0 && results8[0].Values.Count() > 0)
             {
-
-                reading.T4 = float.Parse(results8[0].Values[0][1].ToString());
+                var temp_index = results8[0].Values.Count();
+                reading.T4 = float.Parse(results8[0].Values[temp_index -1][1].ToString());
                 reading.Status = 1;
 
             }
@@ -846,8 +906,8 @@ namespace WebGGSignal.Controllers
 
             if (results9.Count > 0 && results9[0].Values.Count() > 0)
             {
-
-                reading.T5 = float.Parse(results9[0].Values[0][1].ToString());
+                var temp_index = results9[0].Values.Count();
+                reading.T5 = float.Parse(results9[0].Values[temp_index -1][1].ToString());
                 reading.Status = 1;
 
             }
