@@ -31,7 +31,6 @@
     <script>
 
         @model WebGGSignal.Models.ReadingResultModel
-        alert("111");
         var url = window.location.href;
         var myString = url;
         var lastChar = myString[myString.length-1];
@@ -63,8 +62,9 @@
 
                 var Va1T_status = "@Model.Va1TString"
                 @* LastTrip = @Model.unixStart*@
-
-                    alert(LastTrip.toString());
+        
+        
+        
 
         getElementById("log").innerHTML = login;
         function GetSelectedValue() {
@@ -83,7 +83,6 @@
 
             var e = document.getElementById("MCCBs");
             var result = e.options[e.selectedIndex].value;
-                       // alert(result);
             var g = document.getElementById("DynamicTable").rows[3].cells;
             g[1].innerHTML = Va1T_status + " (" + result + ")";
 
