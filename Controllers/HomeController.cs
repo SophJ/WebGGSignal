@@ -440,12 +440,39 @@ namespace WebGGSignal.Controllers
             {
                 var temp_index = results10[0].Values.Count();
                 reading.TotalKWhCH1 = float.Parse(results10[0].Values[temp_index - 1][1].ToString());
-                reading.Status = 1;
+                reading.Va1T = DateTime.Parse(results10[0].Values[temp_index - 1][0].ToString());
+                Console.WriteLine("testets");
+                Console.WriteLine(reading.Va1T);
 
+                CultureInfo enUK = new CultureInfo("en-UK");
+                //CultureInfo enSG = new CultureInfo("en-SG");
+                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+
+                string lstdateString, format;
+
+                DateTime result;
+                DateTime sgtTime;
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                lstdateString = reading.Va1T.ToString();
+                format = "MM/dd/yyyy HH:mm:ss tt";
+                try
+                {
+                    result = DateTime.ParseExact(lstdateString, "M/dd/yyyy h:mm:ss tt", enUK, DateTimeStyles.None);
+                    sgtTime = TimeZoneInfo.ConvertTimeFromUtc(result, sgtZone);
+                    Console.WriteLine("{0} converts to {1}.", lstdateString, result.ToString());
+                    Console.WriteLine("SGTime: {0}.", sgtTime.ToString());
+                    reading.Va1TString = sgtTime.ToString();
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("{0} is not in the correct format.", lstdateString);
+                    reading.Va1TString = lstdateString.ToString();
+                }
+                reading.Status = 1;
             }
             else
             {
-               Console.WriteLine("No data");
+                Console.WriteLine("No data");
             }
 
             //VA1
@@ -857,6 +884,7 @@ namespace WebGGSignal.Controllers
                 catch (FormatException)
                 {
                     Console.WriteLine("{0} is not in the correct format.", lstdateString);
+                    reading.Va1TString = lstdateString.ToString();
                 }
                 reading.Status = 1;
             }
