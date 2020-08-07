@@ -34,10 +34,12 @@
     <script>
 
           var Temperature1_status = @Model.T1
-    var Temperature2_status = @Model.T2
-    var Temperature3_status = @Model.T3
-    var Temperature4_status = @Model.T4
-    var Temperature5_status = @Model.T5
+          var Temperature2_status = @Model.T2
+          var Temperature3_status = @Model.T3
+          var Temperature4_status = @Model.T4
+          var Temperature5_status = @Model.T5
+
+         var Va1T_status = "@Model.Va1TString"
 
         function GetSelectedValue() {
             var e = document.getElementById("Temperatures");
@@ -53,6 +55,9 @@
 
             a[1].innerHTML = str1.concat(result);
             b[1].innerHTML = str2.concat(result);
+
+            var g = document.getElementById("DynamicTable").rows[3].cells;
+            g[1].innerHTML = Va1T_status + " (" + result + ")";
 
             if (result == "Temperature1") {
 
@@ -107,7 +112,13 @@
             <td>Highest Temperature (Last 24 hrs):</td>
             <td> To be Continued </td>
         </tr>
+        <tr>
+            <td>Date & Time :</td>
+            <td>
+                <script>@Model.Va1TString</script>
+            </td>
 
+        </tr>
     </table>
 
     <table id="StaticTable">
