@@ -494,13 +494,16 @@
                 }
 
                 function passValue() {
+
                         GetSelectedValue();
                         var t = document.getElementById("DeviceId");
+
                         var selection = t.options[t.selectedIndex].value;
                         var a = MCCB1_59001_Status;
                         //var b = MCCB2_59001_Status;
                         //var c = MCCB3_59001_Status;
                         //var d = MCCB4_59001_Status;
+
                         if (selection == 59001) {
                             document.getElementById("a").value = a;
                         //    document.getElementById("b").value = b;
