@@ -31,6 +31,7 @@ namespace WebGGSignal.Controllers
         {
 
             // Query Device ID
+
             // SHOW TAG VALUES ON "MCCBSensors" FROM "Reading" WITH KEY = "DeviceId"
             var query0 = "SHOW TAG VALUES ON \"MCCBSensors\" FROM \"Reading\" WITH KEY = \"DeviceId\"";
 
@@ -79,7 +80,7 @@ namespace WebGGSignal.Controllers
             // var query1 = string.Format("select (\"MCCB1\") from basic.Reading WHERE DeviceId = iCurrentDeviceId.Tostring + "AND time >= '" + startDate + "' AND time <='" + endDate + "'");
 
             //MCCB1
-            var query1 = string.Format("select (\"MCCB1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time <='" + endDate + "'"); //Get latest timestamp for specific device
+            var query1 = string.Format("select last(\"MCCB1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time <='" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results1 = await _client.QueryAsync("MCCBSensors", query1);
          
             //_client = new InfluxDb("http://sdbinflux.southeastasia.cloudapp.azure.com:8086/", "API", "API2212");
@@ -108,7 +109,7 @@ namespace WebGGSignal.Controllers
             }
 
             //MCCB2
-            var query2 = string.Format("select (\"MCCB2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query2 = string.Format("select last(\"MCCB2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results2 = await _client.QueryAsync("MCCBSensors", query2);
 
     
@@ -122,7 +123,7 @@ namespace WebGGSignal.Controllers
             }
 
             //MCCB3
-            var query3 = string.Format("select (\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query3 = string.Format("select last(\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results3 = await _client.QueryAsync("MCCBSensors", query3);
 
 
@@ -135,7 +136,7 @@ namespace WebGGSignal.Controllers
             }
 
             //MCCB4
-            var query4 = string.Format("select (\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query4 = string.Format("select last(\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results4 = await _client.QueryAsync("MCCBSensors", query4);
 
       
@@ -149,7 +150,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T1
-            var query5 = string.Format("select (\"T1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query5 = string.Format("select last(\"T1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results5 = await _client.QueryAsync("MCCBSensors", query5);
 
          
@@ -163,7 +164,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T2
-            var query6 = string.Format("select (\"T2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query6 = string.Format("select last(\"T2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results6 = await _client.QueryAsync("MCCBSensors", query6);
 
 
@@ -176,7 +177,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T3
-            var query7 = string.Format("select (\"T3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query7 = string.Format("select last(\"T3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results7 = await _client.QueryAsync("MCCBSensors", query7);
 
             if (results7.Count > 0 && results7[0].Values.Count() > 0)
@@ -188,7 +189,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T4
-            var query8 = string.Format("select (\"T4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query8 = string.Format("select last(\"T4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results8 = await _client.QueryAsync("MCCBSensors", query8);
 
 
@@ -201,7 +202,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T5
-            var query9 = string.Format("select (\"T5\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query9 = string.Format("select last(\"T5\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results9 = await _client.QueryAsync("MCCBSensors", query9);
 
             if (results9.Count > 0 && results9[0].Values.Count() > 0)
@@ -213,7 +214,7 @@ namespace WebGGSignal.Controllers
             }
 
             //Channel1-TotalKWh
-            var query10 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query10 = string.Format("select last(\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results10 = await _client.QueryAsync("MCCBSensors", query10);
 
             if (results10.Count > 0 && results10[0].Values.Count() > 0)
@@ -225,7 +226,7 @@ namespace WebGGSignal.Controllers
             }
 
             //Channel2-TotalKWh
-            var query11 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query11 = string.Format("select last(\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results11 = await _client.QueryAsync("MCCBSensors", query11);
 
             if (results11.Count > 0 && results11[0].Values.Count() > 0)
@@ -237,7 +238,7 @@ namespace WebGGSignal.Controllers
             }
 
             //Channel3-TotalKWh
-            var query12 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query12 = string.Format("select last(\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results12 = await _client.QueryAsync("MCCBSensors", query12);
 
             if (results12.Count > 0 && results12[0].Values.Count() > 0)
@@ -249,7 +250,7 @@ namespace WebGGSignal.Controllers
             }
 
             //Channel4-TotalKWh
-            var query13 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query13 = string.Format("select last(\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results13 = await _client.QueryAsync("MCCBSensors", query13);
 
             if (results13.Count > 0 && results13[0].Values.Count() > 0)
@@ -283,7 +284,7 @@ namespace WebGGSignal.Controllers
             _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
 
             //MCCB1
-            var query1 = string.Format("select (\"MCCB1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query1 = string.Format("select last(\"MCCB1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results1 = await _client.QueryAsync("MCCBSensors", query1);
 
             if (results1.Count > 0 && results1[0].Values.Count() > 0)
@@ -325,7 +326,7 @@ namespace WebGGSignal.Controllers
             }
 
             //MCCB2
-            var query2 = string.Format("select (\"MCCB2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query2 = string.Format("select last(\"MCCB2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results2 = await _client.QueryAsync("MCCBSensors", query2);
 
             if (results2.Count > 0 && results2[0].Values.Count() > 0)
@@ -337,7 +338,7 @@ namespace WebGGSignal.Controllers
             }
 
             //MCCB3
-            var query3 = string.Format("select (\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query3 = string.Format("select last(\"MCCB3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results3 = await _client.QueryAsync("MCCBSensors", query3);
 
             if (results3.Count > 0 && results3[0].Values.Count() > 0)
@@ -349,7 +350,7 @@ namespace WebGGSignal.Controllers
             }
 
             //MCCB4
-            var query4 = string.Format("select (\"MCCB4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query4 = string.Format("select last(\"MCCB4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results4 = await _client.QueryAsync("MCCBSensors", query4);
 
             if (results4.Count > 0 && results4[0].Values.Count() > 0)
@@ -432,7 +433,7 @@ namespace WebGGSignal.Controllers
             _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
 
             //Channel1-TotalKWh
-            var query10 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query10 = string.Format("select last(\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results10 = await _client.QueryAsync("MCCBSensors", query10);
 
             if (results10.Count > 0 && results10[0].Values.Count() > 0)
@@ -448,7 +449,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VA1
-            var query14 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query14 = string.Format("select last(\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results14 = await _client.QueryAsync("MCCBSensors", query14);
 
             if (results14.Count > 0 && results14[0].Values.Count() > 0)
@@ -490,7 +491,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VB1
-            var query15 = string.Format("select (\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query15 = string.Format("select last(\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results15 = await _client.QueryAsync("MCCBSensors", query15);
 
             if (results15.Count > 0 && results15[0].Values.Count() > 0)
@@ -502,7 +503,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VC1
-            var query16 = string.Format("select (\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query16 = string.Format("select last(\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results16 = await _client.QueryAsync("MCCBSensors", query16);
 
             if (results16.Count > 0 && results16[0].Values.Count() > 0)
@@ -514,7 +515,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IA1
-            var query17 = string.Format("select (\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query17 = string.Format("select last(\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results17 = await _client.QueryAsync("MCCBSensors", query17);
 
             if (results17.Count > 0 && results17[0].Values.Count() > 0)
@@ -526,7 +527,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IB1
-            var query18 = string.Format("select (\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query18 = string.Format("select last(\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results18 = await _client.QueryAsync("MCCBSensors", query18);
 
             if (results18.Count > 0 && results18[0].Values.Count() > 0)
@@ -538,7 +539,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IC1
-            var query19 = string.Format("select (\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query19 = string.Format("select last(\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '1'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results19 = await _client.QueryAsync("MCCBSensors", query19);
 
             if (results19.Count > 0 && results19[0].Values.Count() > 0)
@@ -550,7 +551,7 @@ namespace WebGGSignal.Controllers
             }
 
             //Channel2-TotalKWh
-            var query11 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query11 = string.Format("select last(\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results11 = await _client.QueryAsync("MCCBSensors", query11);
 
             if (results11.Count > 0 && results11[0].Values.Count() > 0)
@@ -562,7 +563,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VA2
-            var query20 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query20 = string.Format("select last(\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results20 = await _client.QueryAsync("MCCBSensors", query20);
 
             if (results20.Count > 0 && results20[0].Values.Count() > 0)
@@ -574,7 +575,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VB2
-            var query21 = string.Format("select (\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query21 = string.Format("select last(\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results21 = await _client.QueryAsync("MCCBSensors", query21);
 
             if (results21.Count > 0 && results21[0].Values.Count() > 0)
@@ -586,7 +587,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VC2
-            var query22 = string.Format("select (\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query22 = string.Format("select last(\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results22 = await _client.QueryAsync("MCCBSensors", query22);
 
             if (results22.Count > 0 && results22[0].Values.Count() > 0)
@@ -598,7 +599,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IA2
-            var query23 = string.Format("select (\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query23 = string.Format("select last(\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results23 = await _client.QueryAsync("MCCBSensors", query23);
 
             if (results23.Count > 0 && results23[0].Values.Count() > 0)
@@ -610,7 +611,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IB2
-            var query24 = string.Format("select (\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query24 = string.Format("select last(\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results24 = await _client.QueryAsync("MCCBSensors", query24);
 
             if (results24.Count > 0 && results24[0].Values.Count() > 0)
@@ -622,7 +623,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IC2
-            var query25 = string.Format("select (\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query25 = string.Format("select last(\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '2'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results25 = await _client.QueryAsync("MCCBSensors", query25);
 
             if (results25.Count > 0 && results25[0].Values.Count() > 0)
@@ -635,7 +636,7 @@ namespace WebGGSignal.Controllers
 
 
             //Channel3-TotalKWh
-            var query12 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query12 = string.Format("select last(\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results12 = await _client.QueryAsync("MCCBSensors", query12);
 
             if (results12.Count > 0 && results12[0].Values.Count() > 0)
@@ -647,7 +648,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VA3
-            var query26 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query26 = string.Format("select last(\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results26 = await _client.QueryAsync("MCCBSensors", query26);
 
             if (results26.Count > 0 && results26[0].Values.Count() > 0)
@@ -659,7 +660,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VB3
-            var query27 = string.Format("select (\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query27 = string.Format("select last(\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results27 = await _client.QueryAsync("MCCBSensors", query27);
 
             if (results27.Count > 0 && results27[0].Values.Count() > 0)
@@ -671,7 +672,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VC3
-            var query28 = string.Format("select (\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query28 = string.Format("select last(\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results28 = await _client.QueryAsync("MCCBSensors", query28);
 
             if (results28.Count > 0 && results28[0].Values.Count() > 0)
@@ -683,7 +684,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IA3
-            var query29 = string.Format("select (\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query29 = string.Format("select last(\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results29 = await _client.QueryAsync("MCCBSensors", query29);
 
             if (results29.Count > 0 && results29[0].Values.Count() > 0)
@@ -695,7 +696,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IB3
-            var query30 = string.Format("select (\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query30 = string.Format("select last(\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results30 = await _client.QueryAsync("MCCBSensors", query30);
 
             if (results30.Count > 0 && results30[0].Values.Count() > 0)
@@ -707,7 +708,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IC3
-            var query31 = string.Format("select (\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query31 = string.Format("select last(\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '3'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results31 = await _client.QueryAsync("MCCBSensors", query31);
 
             if (results31.Count > 0 && results31[0].Values.Count() > 0)
@@ -720,7 +721,7 @@ namespace WebGGSignal.Controllers
 
 
             //Channel4-TotalKWh
-            var query13 = string.Format("select (\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query13 = string.Format("select last(\"TotalKWh\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results13 = await _client.QueryAsync("MCCBSensors", query13);
 
             if (results13.Count > 0 && results13[0].Values.Count() > 0)
@@ -732,7 +733,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VA4
-            var query32 = string.Format("select (\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query32 = string.Format("select last(\"Va\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results32 = await _client.QueryAsync("MCCBSensors", query32);
 
             if (results32.Count > 0 && results32[0].Values.Count() > 0)
@@ -744,7 +745,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VB4
-            var query33 = string.Format("select (\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query33 = string.Format("select last(\"Vb\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results33 = await _client.QueryAsync("MCCBSensors", query33);
 
             if (results27.Count > 0 && results33[0].Values.Count() > 0)
@@ -756,7 +757,7 @@ namespace WebGGSignal.Controllers
             }
 
             //VC4
-            var query34 = string.Format("select (\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query34 = string.Format("select last(\"Vc\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results34 = await _client.QueryAsync("MCCBSensors", query34);
 
             if (results34.Count > 0 && results34[0].Values.Count() > 0)
@@ -768,7 +769,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IA4
-            var query35 = string.Format("select (\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query35 = string.Format("select last(\"Ia\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results35 = await _client.QueryAsync("MCCBSensors", query35);
 
             if (results35.Count > 0 && results35[0].Values.Count() > 0)
@@ -780,7 +781,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IB4
-            var query36 = string.Format("select (\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query36 = string.Format("select last(\"Ib\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results36 = await _client.QueryAsync("MCCBSensors", query36);
 
             if (results36.Count > 0 && results36[0].Values.Count() > 0)
@@ -792,7 +793,7 @@ namespace WebGGSignal.Controllers
             }
 
             //IC4
-            var query37 = string.Format("select (\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query37 = string.Format("select last(\"Ic\") from basic.Reading WHERE DeviceId = '59001' AND ChannelId = '4'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results37 = await _client.QueryAsync("MCCBSensors", query37);
 
             if (results37.Count > 0 && results37[0].Values.Count() > 0)
@@ -823,7 +824,7 @@ namespace WebGGSignal.Controllers
             _client = new InfluxDb("http://52.163.189.223:8086/", "API", "API1234");
 
             //T1
-            var query5 = string.Format("select (\"T1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query5 = string.Format("select last(\"T1\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results5 = await _client.QueryAsync("MCCBSensors", query5);
 
             if (results5.Count > 0 && results5[0].Values.Count() > 0)
@@ -865,7 +866,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T2
-            var query6 = string.Format("select (\"T2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query6 = string.Format("select last(\"T2\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results6 = await _client.QueryAsync("MCCBSensors", query6);
 
             if (results6.Count > 0 && results6[0].Values.Count() > 0)
@@ -877,7 +878,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T3
-            var query7 = string.Format("select (\"T3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query7 = string.Format("select last(\"T3\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results7 = await _client.QueryAsync("MCCBSensors", query7);
 
             if (results7.Count > 0 && results7[0].Values.Count() > 0)
@@ -889,7 +890,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T4
-            var query8 = string.Format("select (\"T4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query8 = string.Format("select last(\"T4\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results8 = await _client.QueryAsync("MCCBSensors", query8);
 
             if (results8.Count > 0 && results8[0].Values.Count() > 0)
@@ -901,7 +902,7 @@ namespace WebGGSignal.Controllers
             }
 
             //T5
-            var query9 = string.Format("select (\"T5\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
+            var query9 = string.Format("select last(\"T5\") from basic.Reading WHERE DeviceId = '59001'" + "AND time >= '" + startDate + "' AND time < '" + endDate + "'"); //Get latest timestamp for specific device
             List<Serie> results9 = await _client.QueryAsync("MCCBSensors", query9);
 
             if (results9.Count > 0 && results9[0].Values.Count() > 0)
