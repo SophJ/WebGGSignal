@@ -31,7 +31,6 @@ namespace WebGGSignal.Controllers
         {
 
             // Query Device ID
-
             // SHOW TAG VALUES ON "MCCBSensors" FROM "Reading" WITH KEY = "DeviceId"
             var query0 = "SHOW TAG VALUES ON \"MCCBSensors\" FROM \"Reading\" WITH KEY = \"DeviceId\"";
 
@@ -317,6 +316,7 @@ namespace WebGGSignal.Controllers
                 catch (FormatException)
                 {
                     Console.WriteLine("{0} is not in the correct format.", lstdateString);
+                    reading.Va1TString = lstdateString.ToString();
                 }
                 reading.Status = 1;
             }
