@@ -296,7 +296,13 @@ namespace WebGGSignal.Controllers
 
                 CultureInfo enUK = new CultureInfo("en-UK");
                 //CultureInfo enSG = new CultureInfo("en-SG");
+
+                #if RELEASE
+                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Singapore");
+                #endif
+                #if DEBUG
                 TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+                #endif
 
                 string lstdateString, format;
 
