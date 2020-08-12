@@ -297,6 +297,7 @@ namespace WebGGSignal.Controllers
                 CultureInfo enUK = new CultureInfo("en-UK");
                 //CultureInfo enSG = new CultureInfo("en-SG");
 
+
                 #if RELEASE
                 TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Singapore");
                 #endif
@@ -871,7 +872,7 @@ namespace WebGGSignal.Controllers
 
                 CultureInfo enUK = new CultureInfo("en-UK");
                 //CultureInfo enSG = new CultureInfo("en-SG");
-                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
+                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Singapore");   //Singapore Standard Time
 
                 string lstdateString, format;
 
