@@ -29,7 +29,7 @@
         <option value="PowerMeter4">Power Meter4</option>
     </select>
 
-      <script>
+    <script>
 
                   @model WebGGSignal.Models.ReadingResultModel
 
@@ -49,7 +49,7 @@
                         var IB2_status = @Model.Ib2
                         var IC2_status = @Model.Ic2
 
-                            var Va1T_status = "AAAAAAA"
+                            var Va1T_status = "@Model.Va1TString"
 
                             function GetSelectedValue() {
 
@@ -185,7 +185,7 @@
                 }
 
 
-        </script>
+    </script>
 
         <br />
         <br />
