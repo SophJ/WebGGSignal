@@ -431,6 +431,7 @@ namespace WebGGSignal.Controllers
             Console.WriteLine("===========Power Meter===========");
             Console.WriteLine(utcDate.ToString());
 
+
             //startDate = [Current Time - 5 min]
             //endDate = [Current Time]
             startDate = utcDate.AddMinutes(-5).ToString("yyyy-MM-ddTHH:mm:ss.000Z");
@@ -495,8 +496,8 @@ namespace WebGGSignal.Controllers
 
                 CultureInfo enUK = new CultureInfo("en-UK");
                 //CultureInfo enSG = new CultureInfo("en-SG");
-                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Singapore Standard Time");
-                
+                TimeZoneInfo sgtZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Singapore");   //Singapore Standard Time
+
                 string lstdateString, format;
 
                 DateTime result;
